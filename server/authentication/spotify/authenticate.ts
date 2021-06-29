@@ -6,6 +6,7 @@ import axios from 'axios';
 import querystring from 'querystring';
 
 import spotify from '../../../config/spotify.config';
+import cache from '../cache';
 
 const {
   client_id,
@@ -33,6 +34,11 @@ const authenticate = async (req: Request, res: Response) => {
     });
 
     const { access_token, refresh_token } = response.data;
+
+    cache.setex('spotify access token', 3600, access_token);
+    cache.setex('spotify refresh token', 3600, refresh_token);
+
+    res.redirect(200, '/home');
   } catch (err) {
     res.status(500).send(err);
   }
