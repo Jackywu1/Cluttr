@@ -40,42 +40,10 @@ const authenticate = async (req: Request, res: Response) => {
     cache.setex('spotify refresh token', 3600, refresh_token);
 
     res.redirect(200, '/home');
+    // res.redirect(200, `/youtube/login`);
   } catch (err) {
     res.status(500).send(err);
   }
 };
 
 export default authenticate;
-
-//   // authorize user
-//   // returns access and refresh tokens
-//   // redirects user to home page
-//   authorize(req, res) {
-//     const { code, state } = req.query;
-//     const data = querystring.stringify({
-//       grant_type: 'authorization_code',
-//       code,
-//       redirect_uri,
-//     });
-
-//     axios({
-//       url: `https://accounts.spotify.com/api/token`,
-//       method: `post`,
-//       data,
-//       headers: {
-//         'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')),
-//       },
-//     })
-//       .then(({ data }) => {
-//         const { access_token, refresh_token } = data;
-
-//         cache.setex(`spotify access token`, 3600, access_token);
-//         cache.setex(`spotify refresh token`, 3600, refresh_token);
-
-//         res.redirect(200, `/youtube/login`);
-//       })
-//       .catch((err) => {
-//         res.send(err);
-//       });
-//   },
-// };
