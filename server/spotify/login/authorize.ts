@@ -17,7 +17,7 @@ const {
 
 const authorize = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { code } = req.query;
+    const { state, code } = req.query;
 
     const data = querystring.stringify({
       grant_type: 'authorization_code',
@@ -35,10 +35,7 @@ const authorize = async (req: Request, res: Response, next: NextFunction) => {
     });
 
     const { access_token } = response.data;
-    cache.add('', 3600, access_token);
-
-    console.log('access token', access_token);
-    next();
+    cache.add(state as string, 3600, access_token);
   } catch (err) {
     res.status(500).send(err);
   }

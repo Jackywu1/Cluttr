@@ -1,18 +1,16 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
 /* eslint-disable no-console */
-import express from 'express';
+import express, { Router } from 'express';
 
 import router from './controller/router';
-import authenticator from './authentication';
 
-const server = () => {
+const server = (services: Array<Router>) => {
   const app = express();
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-
-  // authenticate user
-
-  app.use(router());
+  app.use(router(services));
 
   return app;
 };

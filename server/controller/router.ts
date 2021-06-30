@@ -1,16 +1,11 @@
-import express, { Request, Response } from 'express';
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
+import express, { Router } from 'express';
 
-const router = () => {
+const router = (services: Array<Router>) => {
   const app = express.Router();
 
-  app.get('/login', (req: Request, res: Response) => res.redirect(200, '/spotify/login'));
-  app.get('/login/spotify', (req: Request, res: Response) => {
-    try {
-
-    } catch (err) {
-
-    }
-  });
+  services.forEach((service) => app.use(service));
 
   return app;
 };

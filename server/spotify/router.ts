@@ -2,14 +2,14 @@
 /* eslint-disable import/extensions */
 import express, { Request, Response, NextFunction } from 'express';
 
-import verify from './login/verify';
+// import verify from './login/verify';
 import spotify from './index';
 
 const router = () => {
   const app = express.Router();
 
   // check authorization
-  app.use('/spotify', verify);
+  // app.use('/spotify', verify);
 
   // authentication / authorization
   app.get('/spotify/login', (req: Request, res: Response) => res.redirect(200, '/spotify/authenticate'));
