@@ -5,8 +5,8 @@ import { Request, Response } from 'express';
 import axios from 'axios';
 import querystring from 'querystring';
 
-import youtube from '../../config/youtube.config';
-import cache from './cache';
+import youtube from '../../../config/youtube.config';
+import cache from '../cache';
 
 const {
   client_id, client_secret, redirect_uri,

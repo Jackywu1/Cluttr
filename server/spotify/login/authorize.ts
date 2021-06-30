@@ -17,7 +17,7 @@ const {
 
 const authorize = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { state, code } = req.query;
+    const { code } = req.query;
 
     const data = querystring.stringify({
       grant_type: 'authorization_code',
@@ -35,7 +35,10 @@ const authorize = async (req: Request, res: Response, next: NextFunction) => {
     });
 
     const { access_token } = response.data;
-    cache.add(state as string, 3600, access_token);
+    cache.add(client_id, 3600, access_token);
+
+    res.redirect(200, '/spotify/playlist');
+    // next();
   } catch (err) {
     res.status(500).send(err);
   }

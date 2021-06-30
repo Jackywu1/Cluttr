@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
-import spotify from '../spotify/router';
+import playlist from './playlist';
 
 export default {
-  spotify,
+  playlist,
 };
