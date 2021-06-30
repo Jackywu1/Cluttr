@@ -37,7 +37,7 @@ const authorize = async (req: Request, res: Response, next: NextFunction) => {
     const { access_token } = response.data;
     cache.add(client_id, 3600, access_token);
 
-    res.redirect(200, '/spotify/playlist');
+    res.redirect(200, '/spotify/playlist/info');
     // next();
   } catch (err) {
     res.status(500).send(err);

@@ -19,7 +19,7 @@ const router = () => {
 
   // API routes
   app.get('/spotify/playlist', routes.playlist);
-  app.get('/spotify/playlist/info', () => {});
+  app.get('/spotify/playlist/info', routes.playlistInfo);
 
   return app;
 };
