@@ -5,14 +5,12 @@ import { Request, Response } from 'express';
 import axios from 'axios';
 import querystring from 'querystring';
 
-import youtube from '../../../config/youtube.config';
-import cache from '../cache';
+import youtube from '../../config/youtube.config';
+import cache from './cache';
 
 const {
   client_id, client_secret, redirect_uri,
 } = youtube;
-
-console.log(client_id, client_secret, redirect_uri);
 
 const EXPIRATION = parseInt(process.env.EXPIRATION!, 10) || 3600;
 
@@ -37,7 +35,7 @@ const authorize = async (req: Request, res: Response) => {
     });
 
     const { access_token } = response.data;
-    cache.setex('youtube access token', EXPIRATION as number, access_token);
+    cache.add('youtube access token', EXPIRATION as number, access_token);
 
     res.redirect(200, '/home');
   } catch (err) {

@@ -2,7 +2,7 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-buffer-constructor */
 /* eslint-disable camelcase */
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import axios from 'axios';
 import querystring from 'querystring';
 
@@ -15,7 +15,7 @@ const {
   redirect_uri,
 } = spotify;
 
-const authenticate = async (req: Request, res: Response) => {
+const authorize = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { code } = req.query;
 
@@ -34,16 +34,14 @@ const authenticate = async (req: Request, res: Response) => {
       },
     });
 
-    const { access_token, refresh_token } = response.data;
+    const { access_token } = response.data;
+    cache.add('', 3600, access_token);
 
-    cache.setex('spotify access token', 3600, access_token);
-    cache.setex('spotify refresh token', 3600, refresh_token);
-
-    res.redirect(200, '/home');
-    // res.redirect(200, `/youtube/login`);
+    console.log('access token', access_token);
+    next();
   } catch (err) {
     res.status(500).send(err);
   }
 };
 
-export default authenticate;
+export default authorize;

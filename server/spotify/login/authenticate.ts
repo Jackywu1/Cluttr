@@ -9,7 +9,7 @@ const {
   client_id, redirect_uri, state,
 } = spotify;
 
-const authorize = (req: Request, res: Response) => {
+const authenticate = (req: Request, res: Response) => {
   const query = querystring.stringify({
     client_id,
     response_type: 'code',
@@ -21,4 +21,4 @@ const authorize = (req: Request, res: Response) => {
   res.redirect(`https://accounts.spotify.com/authorize?${query}`);
 };
 
-export default authorize;
+export default authenticate;

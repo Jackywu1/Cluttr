@@ -3,7 +3,7 @@
 import { Request, Response } from 'express';
 import querystring from 'querystring';
 
-import youtube from '../../../config/youtube.config';
+import youtube from '../../config/youtube.config';
 
 const {
   client_id, redirect_uri,
