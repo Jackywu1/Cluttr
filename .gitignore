@@ -105,7 +105,5 @@ dist
 
 # API keys
 config/spotify.config.ts
-
 config/twitter.config.ts
-
 config/youtube.config.ts
