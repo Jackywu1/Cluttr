@@ -37,7 +37,7 @@ const authorize = async (req: Request, res: Response) => {
     const { access_token } = response.data;
     cache.add(client_id, EXPIRATION as number, access_token);
 
-    res.redirect(200, '/youtube/video');
+    res.redirect(200, '/youtube/search');
   } catch (err) {
     res.status(500).send(err);
   }

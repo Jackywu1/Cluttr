@@ -15,8 +15,8 @@ const {
 
 const search = async (req: Request, res: Response) => {
   try {
-    // const { q } = req.params;
-    const q = 'dogs';
+    // const { q } = req.query;
+    const q = 'illenium';
     const query = querystring.stringify({
       part: 'snippet',
       q,

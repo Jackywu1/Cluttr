@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Request, Response } from 'express';
 
 import auth from './login';
 import routes from './routes';
@@ -16,7 +16,7 @@ const router = () => {
   app.get('/youtube/authorize', (req: Request, res: Response) => auth.authorize(req, res));
 
   // API routes
-  app.get('/youtube/video', routes.search);
+  app.get('/youtube/search', routes.search);
 
   return app;
 };
