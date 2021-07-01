@@ -4,6 +4,14 @@
 
 <img width="823" alt="Screen Shot 2021-07-01 at 12 47 50 PM" src="https://user-images.githubusercontent.com/72538359/124181767-cca9ca00-da6a-11eb-842f-89212c8b9a81.png">
 
+## Spotify Authorization Flow
+
+#### Authentication
+
+1. rename the ```config/spotify.example.config.ts``` file to ```config/spotify.config.ts```
+2. add your ```client_id```, ```client_secret```, ```redirect_uri```, and ```state```
+3. make a request to /spotify/login to get an access code stored in the cache
+
 ## Spotify Microservice API Reference
 
 #### Get all user playlists
