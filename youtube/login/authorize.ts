@@ -28,16 +28,16 @@ const authorize = async (req: Request, res: Response) => {
 
     const response = await axios({
       url: `https://oauth2.googleapis.com/token?${query}`,
-      method: 'post',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     });
 
     const { access_token } = response.data;
-    cache.add('youtube access token', EXPIRATION as number, access_token);
+    cache.add(client_id, EXPIRATION as number, access_token);
 
-    res.redirect(200, '/home');
+    res.redirect(200, '/youtube/video');
   } catch (err) {
     res.status(500).send(err);
   }

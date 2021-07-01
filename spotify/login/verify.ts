@@ -12,6 +12,7 @@ const verify = async (req: Request, res: Response, next: NextFunction) => {
       req.body.token = accessCode;
       next();
     } else {
+      req.body.redirect = req.url;
       res.redirect(200, '/spotify/login');
     }
   } catch (err) {

@@ -2,7 +2,7 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-buffer-constructor */
 /* eslint-disable camelcase */
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import axios from 'axios';
 import querystring from 'querystring';
 
@@ -15,7 +15,7 @@ const {
   redirect_uri,
 } = spotify;
 
-const authorize = async (req: Request, res: Response, next: NextFunction) => {
+const authorize = async (req: Request, res: Response) => {
   try {
     const { code } = req.query;
 
@@ -37,8 +37,8 @@ const authorize = async (req: Request, res: Response, next: NextFunction) => {
     const { access_token } = response.data;
     cache.add(client_id, 3600, access_token);
 
-    res.redirect(200, '/spotify/playlist');
-    // next();
+    if (req.body.redirect) res.redirect(200, req.body.redirect);
+    res.redirect(200, '/spotify/playlist/info');
   } catch (err) {
     res.status(500).send(err);
   }

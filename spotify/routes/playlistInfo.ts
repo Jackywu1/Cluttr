@@ -18,7 +18,7 @@ const playlistInfo = async (req: Request, res: Response) => {
 
     const response = await axios({
       url: `https://api.spotify.com/v1/playlists/${id}/tracks`,
-      method: 'get',
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${access_token}`,
