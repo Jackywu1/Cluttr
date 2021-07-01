@@ -3,7 +3,7 @@
 /* eslint-disable no-console */
 import express, { Router } from 'express';
 
-import router from './controller/router';
+import router from './router';
 
 const server = (services: Array<Router>) => {
   const app = express();

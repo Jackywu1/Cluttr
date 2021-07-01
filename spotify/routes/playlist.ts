@@ -1,27 +1,25 @@
-/* eslint-disable camelcase */
 /* eslint-disable import/extensions */
+/* eslint-disable camelcase */
 /* eslint-disable import/no-unresolved */
 import { Request, Response } from 'express';
 import axios from 'axios';
 
-import spotify from '../../../config/spotify.config';
+import spotify from '../../config/spotify.config';
 import cache from '../cache';
 
 const {
   client_id,
 } = spotify;
 
-const playlistInfo = async (req: Request, res: Response) => {
+const playlist = async (req: Request, res: Response) => {
   try {
-    const { id } = req.query;
-    const access_token = await cache.get(client_id);
-
+    const accessCode = await cache.get(client_id);
     const response = await axios({
-      url: `https://api.spotify.com/v1/playlists/${id}/tracks`,
+      url: 'https://api.spotify.com/v1/me/playlists',
       method: 'get',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${access_token}`,
+        Authorization: `Bearer ${accessCode}`,
       },
     });
 
@@ -32,4 +30,4 @@ const playlistInfo = async (req: Request, res: Response) => {
   }
 };
 
-export default playlistInfo;
+export default playlist;
