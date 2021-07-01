@@ -1,4 +1,4 @@
-## Spotify Microservice
+## Spotify Microservice Overview
 
 ### This service follows the official Spotify Authorization Code Flow 
 
