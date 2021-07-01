@@ -1,6 +1,6 @@
 ## Spotify Microservice Overview
 
-### This service follows the official Spotify Authorization Code Flow 
+#### This service follows the official Spotify Authorization Code Flow
 
 <img width="823" alt="Screen Shot 2021-07-01 at 12 47 50 PM" src="https://user-images.githubusercontent.com/72538359/124181767-cca9ca00-da6a-11eb-842f-89212c8b9a81.png">
 
