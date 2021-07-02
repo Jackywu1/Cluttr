@@ -2,6 +2,7 @@
 /* eslint-disable camelcase */
 import { Request, Response } from 'express';
 import axios from 'axios';
+import querystring from 'querystring';
 
 import twitter from '../../config/twitter.config';
 
@@ -12,9 +13,12 @@ const {
 const userTweets = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
+    const query = querystring.stringify({
+      user_id: id,
+    });
 
     const response = await axios({
-      url: `https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=${id}`,
+      url: `https://api.twitter.com/1.1/statuses/user_timeline.json?${query}`,
       headers: {
         'User-Agent': 'v2TweetLookupJS',
         Authorization: `Bearer ${bearer_token}`,

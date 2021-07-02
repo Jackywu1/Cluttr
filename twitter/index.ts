@@ -8,6 +8,7 @@ const router = () => {
   const app = express.Router();
 
   app.get('/twitter/tweets/:id', routes.userTweets);
+  app.get('/twitter/:user', routes.userProfile);
 
   return app;
 };
