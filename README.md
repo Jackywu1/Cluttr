@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The Cluttr API provides an integration of popular media platforms tailored specific to each user. The API allows developers to seamlessly integrate 
+The Cluttr API provides a collection of popular media platforms tailored specific to each user.
 The API gives developers the ability to seamlessly integrate their existing projects with popular APIs to access their data. 
 
 ## What does this API provide
@@ -21,4 +21,5 @@ The API gives developers the ability to seamlessly integrate their existing proj
 
 ## How does it work
 
-The Cluttr API follows the Microservices architectural pattern, providing a collection of services loosely coupled and integrated together. This allows users to fully automate data extraction from popular APIs and customize their applications with the data needed relevant to their own projects. 
+The Cluttr API follows the Microservices architectural pattern, providing a collection of services loosely coupled and integrated together.
+This allows users to fully automate data extraction from popular APIs and customize their applications with the data needed relevant to their own projects. 
