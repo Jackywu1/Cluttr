@@ -5,13 +5,13 @@
 The Cluttr API provides an integration of popular media platforms tailored specific to each user. The API allows developers to seamlessly integrate 
 The API gives developers the ability to seamlessly integrate their existing projects with popular APIs to access their data. 
 
-## What does this API provide?
+## What does this API provide
 
 - [Spotify Music Data](https://github.com/Jackywu1/Cluttr/tree/main/spotify)
 - Twitter Timeline/Tweets
 - [YouTube Video Search](https://github.com/Jackywu1/Cluttr/tree/main/youtube)
 
-## How to use:
+## How to use
 
 1. Create a new directory ```mkdir Cluttr_Service && cd $_```
 2. Clone project ```git clone https://github.com/Jackywu1/Cluttr.git```
@@ -19,6 +19,6 @@ The API gives developers the ability to seamlessly integrate their existing proj
 4. Run ```npm install``` to download dependencies
 5. Start up the servers! ```npm start```
 
-## How does it work?
+## How does it work
 
 The Cluttr API follows the Microservices architectural pattern, providing a collection of services loosely coupled and integrated together. This allows users to fully automate data extraction from popular APIs and customize their applications with the data needed relevant to their own projects. 
