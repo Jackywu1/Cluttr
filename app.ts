@@ -2,7 +2,7 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 import server from './proxy/index';
-import services from './proxy/services';
+import services from './services';
 
 const PORT = process.env.PORT || 1337;
 
