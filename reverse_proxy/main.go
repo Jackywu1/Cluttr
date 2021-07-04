@@ -15,8 +15,9 @@ import (
 // 	}
 // }
 
-func print(w http.ResponseWriter, r *http.Request) {
+func spotifyLogin(w http.ResponseWriter, r *http.Request) {
 	request := r.URL.RequestURI()
+	fmt.Println("in redirect")
 
 	u, err := url.Parse(request)
 	if err != nil {
@@ -24,7 +25,7 @@ func print(w http.ResponseWriter, r *http.Request) {
 	}
 
 	u.Scheme = "https"
-	u.Host = "127.0.0.1"
+	u.Host = "127.0.0.1:1000"
 
 	http.Redirect(w, r, u.String(), http.StatusMovedPermanently)
 }
@@ -38,7 +39,8 @@ func main() {
 		http.Redirect(w, r, r.URL.RequestURI(), http.StatusMovedPermanently)
 	})
 
-	spotify.HandleFunc("/login", print)
+	spotify.HandleFunc("/login", spotifyLogin)
 
-	log.Fatal(http.ListenAndServe(":3000", router))
+	fmt.Println("Proxy running on port 1337")
+	log.Fatal(http.ListenAndServe(":1337", router))
 }

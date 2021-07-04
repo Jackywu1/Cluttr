@@ -1,0 +1,6 @@
+FROM golang:latest
+WORKDIR /go/src/github.com/Jackywu1/Cluttr
+COPY . ./
+RUN go install .
+EXPOSE 80
+CMD ["./go/bin/reverse_proxy"]
