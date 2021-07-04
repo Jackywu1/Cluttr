@@ -3,7 +3,7 @@
 import { Request, Response } from 'express';
 import querystring from 'querystring';
 
-import spotify from '../../config/spotify.config';
+import spotify from '../config/spotify.config';
 
 const {
   client_id, redirect_uri, state,

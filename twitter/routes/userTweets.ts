@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 import axios from 'axios';
 import querystring from 'querystring';
 
-import twitter from '../../config/twitter.config';
+import twitter from '../config/twitter.config';
 
 const {
   bearer_token,

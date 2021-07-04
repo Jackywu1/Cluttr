@@ -5,7 +5,7 @@ import { Request, Response, NextFunction } from 'express';
 import axios from 'axios';
 
 import cache from '../cache';
-import twitter from '../../config/twitter.config';
+import twitter from '../config/twitter.config';
 
 const {
   bearer_token,

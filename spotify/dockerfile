@@ -1,0 +1,7 @@
+FROM node:latest
+RUN mkdir -p /spotify
+WORKDIR /spotify
+COPY . /spotify
+RUN npm install
+EXPOSE 1000
+CMD ["npm", "start"]

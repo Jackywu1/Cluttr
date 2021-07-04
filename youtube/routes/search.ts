@@ -6,10 +6,9 @@ import axios from 'axios';
 import querystring from 'querystring';
 
 import cache from '../cache';
-import youtube from '../../config/youtube.config';
+import youtube from '../config/youtube.config';
 
 const {
-  api_key,
   client_id,
 } = youtube;
 

@@ -2,7 +2,9 @@
 import redis from 'redis';
 import { promisify } from 'util';
 
-const client = redis.createClient();
+const client = redis.createClient({
+  url: 'redis://spotifyCache:6379',
+});
 
 const cache = {
   add: client.setex.bind(client),

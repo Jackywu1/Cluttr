@@ -1,0 +1,7 @@
+FROM node:latest
+RUN mkdir -p /youtube
+WORKDIR /youtube
+COPY . /youtube
+RUN npm install
+EXPOSE 3000
+CMD ["npm", "start"]

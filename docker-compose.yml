@@ -1,6 +1,10 @@
+version: '3.4'
+
 services:
   spotify:
     build: spotify/
+    depends_on:
+      - 'spotifyCache'
     ports:
       - '1000:1000'
 
@@ -11,5 +15,17 @@ services:
 
   youtube:
     build: youtube/
+    depends_on:
+      - 'youtubeCache'
     ports:
       - '3000:3000'
+
+  spotifyCache:
+    image: redis:latest
+    # ports:
+    #   - '3000': '6379'
+
+  youtubeCache:
+    image: redis:latest
+    # ports:
+    #   - '3000': '6379'

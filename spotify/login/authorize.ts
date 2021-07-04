@@ -6,7 +6,7 @@ import { Request, Response } from 'express';
 import axios from 'axios';
 import querystring from 'querystring';
 
-import spotify from '../../config/spotify.config';
+import spotify from '../config/spotify.config';
 import cache from '../cache';
 
 const {

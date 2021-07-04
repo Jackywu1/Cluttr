@@ -1,0 +1,7 @@
+FROM node:latest
+RUN mkdir -p /twitter
+WORKDIR /twitter
+COPY . /twitter
+RUN npm install
+EXPOSE 2000
+CMD ["npm", "start"]

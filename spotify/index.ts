@@ -3,7 +3,7 @@
 /* eslint-disable import/extensions */
 import express, { Request, Response, NextFunction } from 'express';
 
-import spotify from '../config/spotify.config';
+import spotify from './config/spotify.config';
 import cache from './cache';
 import verify from './login/verify';
 import auth from './login';

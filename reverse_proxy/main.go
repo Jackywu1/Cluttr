@@ -16,8 +16,8 @@ import (
 // }
 
 func spotifyLogin(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("inside spotify login redirect")
 	request := r.URL.RequestURI()
-	fmt.Println("in redirect")
 
 	u, err := url.Parse(request)
 	if err != nil {
@@ -32,6 +32,9 @@ func spotifyLogin(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	router := mux.NewRouter()
+	router.HandleFunc("/spotify", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("at /spotify")
+	})
 	spotify := router.PathPrefix("/spotify").Subrouter()
 
 	spotify.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
