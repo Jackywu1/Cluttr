@@ -1,0 +1,15 @@
+services:
+  spotify:
+    build: spotify/
+    ports:
+      - '1000:1000'
+
+  twitter:
+    build: twitter/
+    ports:
+      - '2000:2000'
+
+  youtube:
+    build: youtube/
+    ports:
+      - '3000:3000'

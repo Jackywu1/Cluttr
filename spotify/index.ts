@@ -9,10 +9,6 @@ import verify from './login/verify';
 import auth from './login';
 import routes from './routes';
 
-const {
-  client_id,
-} = spotify;
-
 const router = () => {
   const app = express.Router();
 

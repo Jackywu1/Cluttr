@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx nodemon"
+    "start": "npx nodemon",
+    "spotify": "npx -p ts-node ts-node spotify/app.ts",
+    "twitter": "npx -p ts-node ts-node twitter/app.ts",
+    "youtube": "npx -p ts-node ts-node youtube/app.ts"
   },
   "repository": {
     "type": "git",
