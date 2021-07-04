@@ -104,6 +104,6 @@ dist
 .tern-port
 
 # API keys
-config/spotify.config.ts
-config/twitter.config.ts
-config/youtube.config.ts
+spotify/config/spotify.config.ts
+twitter/config/twitter.config.ts
+youtube/config/youtube.config.ts
