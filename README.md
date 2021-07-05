@@ -1,5 +1,7 @@
 # Cluttr API
 
+<img width="1166" alt="Screen Shot 2021-07-05 at 4 44 17 AM" src="https://user-images.githubusercontent.com/72538359/124466692-b68e5900-dd4b-11eb-87bf-33137d487880.png">
+
 ## Introduction
 
 The Cluttr API integrates popular media platforms tailored specific to each user.
@@ -28,6 +30,8 @@ The API is designed as a standalone collection of services rather than installed
 6. Connect to endpoints as needed!
 
 ## How does it work
+
+<img width="1168" alt="Screen Shot 2021-07-05 at 4 41 04 AM" src="https://user-images.githubusercontent.com/72538359/124466730-c443de80-dd4b-11eb-8372-8d686730668f.png">
 
 The Cluttr API follows the Microservices architectural pattern, providing a collection of services loosely coupled and integrated together.
 This allows users to fully automate data extraction from popular APIs and customize their applications with the data needed relevant to their own projects. 
