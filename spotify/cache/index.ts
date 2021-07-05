@@ -6,6 +6,8 @@ const client = redis.createClient({
   url: 'redis://spotifyCache:6379',
 });
 
+// const client = redis.createClient();
+
 const cache = {
   add: client.setex.bind(client),
   get: promisify(client.get).bind(client),

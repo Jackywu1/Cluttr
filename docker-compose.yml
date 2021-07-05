@@ -22,10 +22,6 @@ services:
 
   spotifyCache:
     image: redis:latest
-    # ports:
-    #   - '3000': '6379'
 
   youtubeCache:
     image: redis:latest
-    # ports:
-    #   - '3000': '6379'

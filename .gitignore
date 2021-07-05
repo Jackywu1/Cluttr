@@ -105,5 +105,8 @@ dist
 
 # API keys
 spotify/config/spotify.config.ts
+spotify/config/key.pem
+spotify/config/cert.pem
+
 twitter/config/twitter.config.ts
 youtube/config/youtube.config.ts
