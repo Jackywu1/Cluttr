@@ -9,8 +9,9 @@ Cluttr gives developers the ability to seamlessly coalesce their existing projec
 
 ## What does this API provide
 
+- [Cluttr API Gateway](https://github.com/Jackywu1/Cluttr/tree/main/gateway)
 - [Spotify Music Data](https://github.com/Jackywu1/Cluttr/tree/main/spotify)
-- Twitter Timeline/Tweets
+- [Twitter Timeline/Tweets](https://github.com/Jackywu1/Cluttr/tree/main/twitter)
 - [YouTube Video Search](https://github.com/Jackywu1/Cluttr/tree/main/youtube)
 
 ## How to use
