@@ -16,7 +16,7 @@
 GET /youtube/search
 ```
 
-Retrieves a list of the current users playlists
+Retrieves a list of the videos returned by the search term
 
 #### Example Request
 
