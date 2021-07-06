@@ -1,0 +1,7 @@
+FROM node:latest
+RUN mkdir -p /gateway
+WORKDIR /gateway
+COPY . /gateway
+RUN npm install
+EXPOSE 4000
+CMD ["npm", "start"]

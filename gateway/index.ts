@@ -1,77 +1,50 @@
+/* eslint-disable no-undef */
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable camelcase */
 import { ApolloServer } from 'apollo-server';
-import axios from 'axios';
+import ApolloService from './services/apollo-service';
 
-const typeDefs = `
-  type Query {
-    spotifyPlaylist: [Playlist!]!
-  }
+const server = (services: Array<ApolloService>) => {
+  let queryTypes = `
+    type Query {
+  `;
 
-  type Playlist {
-    id: String!
-    name: String!
-    owner: Owner!
-  }
+  let querySubtypes = `
+  `;
 
-  type Owner {
-    display_name: String!
-    external_url: Url
-    id: String!
-  }
-
-  type Url {
-    spotify: String!
-  }
-`;
-
-interface Url {
-  spotify: string;
-}
-
-interface Owner {
-  display_name: string;
-  external_url: URL;
-  id: string;
-}
-
-interface Playlist {
-  id: string;
-  name: string;
-  owner: Owner;
-}
-
-const resolvers = {
-  Query: {
-    spotifyPlaylist: async (): Promise<Playlist | Error> => {
-      try {
-        const response = await axios.get('http://127.0.0.1:1000/spotify/playlist');
-        return response.data;
-      } catch (err) {
-        return err;
-      }
+  const resolverTypes: any = {
+    Query: {
     },
-  },
+  };
 
-  Playlist: {
-    id: (playlist: Playlist): string => playlist.id,
-    name: (playlist: Playlist): string => playlist.name,
-    owner: (playlist: Playlist): Owner => playlist.owner,
-  },
+  services.forEach((service) => {
+    const { types, resolvers } = service;
 
-  Owner: {
-    display_name: (owner: Owner): string => owner.display_name,
-    id: (owner: Owner): string => owner.id,
-    external_url: (owner: Owner): URL => owner.external_url,
-  },
+    const { rootTypes, subTypes } = types;
+    const { rootQueries, subQueries } = resolvers;
 
-  Url: {
-    spotify: (url: Url) => url.spotify,
-  },
+    queryTypes += ` ${rootTypes} `;
+    querySubtypes += `${subTypes}`;
+
+    Object.entries(rootQueries).forEach((rootQuery) => {
+      const [query, resolver] = rootQuery;
+      resolverTypes.Query[query] = resolver;
+    });
+
+    Object.entries(subQueries).forEach((subQuery) => {
+      const [query, resolver] = subQuery;
+      resolverTypes[query] = resolver;
+    });
+  });
+
+  queryTypes += ' }';
+  const typeDefs = queryTypes + querySubtypes;
+
+  return new ApolloServer({
+    typeDefs,
+    resolvers: resolverTypes,
+  });
 };
-
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-});
 
 export default server;
