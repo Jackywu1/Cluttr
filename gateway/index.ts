@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { ApolloServer } from 'apollo-server';
 import axios from 'axios';
 
@@ -9,12 +10,34 @@ const typeDefs = `
   type Playlist {
     id: String!
     name: String!
+    owner: Owner!
+  }
+
+  type Owner {
+    display_name: String!
+    external_url: Url
+    id: String!
+  }
+
+  type Url {
+    spotify: String!
   }
 `;
+
+interface Url {
+  spotify: string;
+}
+
+interface Owner {
+  display_name: string;
+  external_url: URL;
+  id: string;
+}
 
 interface Playlist {
   id: string;
   name: string;
+  owner: Owner;
 }
 
 const resolvers = {
@@ -32,6 +55,17 @@ const resolvers = {
   Playlist: {
     id: (playlist: Playlist): string => playlist.id,
     name: (playlist: Playlist): string => playlist.name,
+    owner: (playlist: Playlist): Owner => playlist.owner,
+  },
+
+  Owner: {
+    display_name: (owner: Owner): string => owner.display_name,
+    id: (owner: Owner): string => owner.id,
+    external_url: (owner: Owner): URL => owner.external_url,
+  },
+
+  Url: {
+    spotify: (url: Url) => url.spotify,
   },
 };
 
