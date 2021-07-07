@@ -3,7 +3,7 @@
 /* eslint-disable import/no-unresolved */
 import Url from '../../interfaces/url';
 
-const spotify = (external_url: Url) => external_url.spotify;
+const spotify = (external_urls: Url) => external_urls.spotify;
 
 export default {
   spotify,

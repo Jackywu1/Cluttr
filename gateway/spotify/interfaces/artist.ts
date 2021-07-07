@@ -1,12 +1,14 @@
+/* eslint-disable camelcase */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
-/* eslint-disable camelcase */
 import Url from './url';
 
-interface Owner {
-  display_name: string;
+interface Artist {
   id: string;
+  name: string;
+  type: string;
+  uri: string;
   external_urls: Url;
 }
 
-export default Owner;
+export default Artist;

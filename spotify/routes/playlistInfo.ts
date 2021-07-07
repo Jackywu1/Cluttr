@@ -13,7 +13,8 @@ const {
 
 const playlistInfo = async (req: Request, res: Response) => {
   try {
-    const { id } = req.query;
+    // const { id } = req.query;
+    const id = '12pRALs7Yz77hnLPlMapqh';
     const access_token = await cache.get(client_id);
 
     const response = await axios({

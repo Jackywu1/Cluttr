@@ -2,12 +2,18 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
-import Url from './external-url';
+import Artist from './artist';
 import Owner from './owner';
 import Playlist from './playlist';
+import PlaylistInfo from './playlist-info';
+import Track from './track';
+import Url from './external-url';
 
 export default {
-  Url,
+  Artist,
   Owner,
   Playlist,
+  PlaylistInfo,
+  Track,
+  Url,
 };
