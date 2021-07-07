@@ -1,37 +1,31 @@
-## Welcome to GitHub Pages
+# Cluttr
 
-You can use the [editor on GitHub](https://github.com/Jackywu1/Cluttr/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+<img width="1166" alt="Screen Shot 2021-07-05 at 4 44 17 AM" src="https://user-images.githubusercontent.com/72538359/124838034-e18acf80-df3a-11eb-85cc-941265413d38.png">
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Introduction
 
-### Markdown
+The Cluttr API integrates popular media platforms tailored specific to each user. Cluttr gives developers the ability to seamlessly coalesce their existing projects with popular APIs to access their data.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## What does this API provide
 
-```markdown
-Syntax highlighted code block
+- [Cluttr API Gateway](https://github.com/Jackywu1/Cluttr/tree/main/gateway)
+- [Spotify Music Data](https://github.com/Jackywu1/Cluttr/tree/main/spotify)
+- [Twitter Timeline/Tweets](https://github.com/Jackywu1/Cluttr/tree/main/twitter)
+- [YouTube Video Search](https://github.com/Jackywu1/Cluttr/tree/main/youtube)
 
-# Header 1
-## Header 2
-### Header 3
+## How to use
 
-- Bulleted
-- List
+The API is designed as a standalone collection of services rather than installed as a project dependency. See more below.
 
-1. Numbered
-2. List
+1. Create a new directory: ```mkdir Cluttr_Service && cd $_```
+2. Clone project: ```git clone https://github.com/Jackywu1/Cluttr.git```
+3. Follow the instructions for Authentication for each service as needed
+4. Run: ```npm install``` to download dependencies
+5. Start up the servers: ```npm start```
+6. Connect to endpoints as needed!
 
-**Bold** and _Italic_ and `Code` text
+## How does it work
 
-[Link](url) and ![Image](src)
-```
+The Cluttr API follows the Microservices architectural pattern, providing a collection of services loosely coupled and integrated together. This allows users to fully automate data extraction from popular APIs and customize their applications with the data needed relevant to their own projects.
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Jackywu1/Cluttr/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+The API is meant to be a standalone collection of services rather than a project dependency. This design choice allows users looking to integrate this API without having to implement the server and endpoints themselves.
