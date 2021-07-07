@@ -8,39 +8,56 @@ The API gateway consolidates and integrates the media microservices. The Gateway
 
 ```
 {
-    "data": {
-        "spotifyPlaylist": [
-            {
+    "spotifyPlaylist": [
+        {
+            "id": String!,
+            "name": String!,
+            "owner": {
+                "display_name": String!,
                 "id": String!,
-                "name": String!,
-                "owner": {
-                    "display_name": String!,
-                    "id": String!,
-                    "external_urls": {
-                        spotify: String!
-                    }
+                "external_urls": {
+                    "spotify": String!
                 }
-            },
-            ...
-        ],
+            }
+        },
+        ...
+    ],
+
+    "spotifyPlaylistInfo" {
+        "track" {
+            "id" String!
+            "name": String!
+            "artists" {
+                "id": String!
+                "name": String!
+                "type": String!
+                "uri": String!
+                "external_urls" {
+                    "spotify": String!
+                }
+            }
+            "external_urls" {
+                "spotify": String!
+            }
+        }
     }
 }
 ```
 
-#### Example Request
+#### Example Request:
 
 {
-  spotifyPlaylist {
-    id
-    name
-    owner {
-      display_name
-      id
-      external_url {
-        spotify
-      }
+    spotifyPlaylist {
+        id
+        name
+        owner {
+            display_name
+            id
+            external_url {
+                spotify
+            }
+        }
     }
-  }
 }
 
 #### Example Response
