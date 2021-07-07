@@ -6,79 +6,14 @@ The API gateway consolidates and integrates the media microservices. The Gateway
 
 ## Schema
 
-```
-{
-    "spotifyPlaylist": [
-        {
-            "id": String!,
-            "name": String!,
-            "owner": {
-                "display_name": String!,
-                "id": String!,
-                "external_urls": {
-                    "spotify": String!
-                }
-            }
-        },
-        ...
-    ],
+<img width="400" alt="Screen Shot 2021-07-07 at 2 28 05 AM" src="https://user-images.githubusercontent.com/72538359/124735754-32fb7600-decb-11eb-8905-232c2d288fd0.png">
 
-    "spotifyPlaylistInfo" {
-        "track" {
-            "id" String!
-            "name": String!
-            "artists" {
-                "id": String!
-                "name": String!
-                "type": String!
-                "uri": String!
-                "external_urls" {
-                    "spotify": String!
-                }
-            }
-            "external_urls" {
-                "spotify": String!
-            }
-        }
-    }
-}
-```
+<img width="400" alt="Screen Shot 2021-07-07 at 2 28 40 AM" src="https://user-images.githubusercontent.com/72538359/124735768-35f66680-decb-11eb-95bc-1ed152a5018f.png">
 
-#### Example Request:
+#### Spotify Playlist Query:
 
-{
-    spotifyPlaylist {
-        id
-        name
-        owner {
-            display_name
-            id
-            external_url {
-                spotify
-            }
-        }
-    }
-}
+<img width="635" alt="Screen Shot 2021-07-07 at 2 36 42 AM" src="https://user-images.githubusercontent.com/72538359/124736974-64c10c80-decc-11eb-936a-3b95042eb1ea.png">
 
-#### Example Response
+#### Spotify Playlist Info Query:
 
-```
-{
-    "data": {
-        "spotifyPlaylist": [
-            {
-                "id": "12pRALs7Yz77hnLPlMapqh",
-                "name": "EDM but only slightly",
-                "owner": {
-                    "display_name": "Jacky Wu",
-                    "id": "22pa2mktupfcvevio3ixpq5oq",
-                    "external_url": {
-                        spotify: "https://open.spotify.com/user/22pa2mktupfcvevio3ixpq5oq"
-                    }
-                }
-            },
-            ...
-        ]
-    }
-}
-```
+<img width="635" alt="Screen Shot 2021-07-07 at 2 35 52 AM" src="https://user-images.githubusercontent.com/72538359/124736950-5c68d180-decc-11eb-9fe4-d27d1b9e9c1e.png">
