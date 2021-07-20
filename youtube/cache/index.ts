@@ -3,7 +3,8 @@ import redis from 'redis';
 import { promisify } from 'util';
 
 const client = redis.createClient({
-  url: 'redis://youtubeCache:6379',
+  // url: 'redis://youtubeCache:6379',
+  url: 'redis://127.0.0.1:6379',
 });
 
 const cache = {

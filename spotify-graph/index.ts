@@ -14,9 +14,6 @@ const service = () => new ApolloServer({
       resolvers,
     },
   ]),
-  context: ({ req }) => {
-
-  },
 });
 
 export default service;

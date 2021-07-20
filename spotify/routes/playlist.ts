@@ -20,7 +20,6 @@ const playlist = async (req: Request, res: Response) => {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${accessCode}`,
-        // Authorization: 'Bearer AQCEmrpeSWderi3Qu3ZUsrWx4g_IRgsUwveVWdRZKN51ZzzRqCBT4M7wkkHGmrAWC5iJJ6-wxfdhtfgtiNmIwgRAMvtOEeEB9c2w0MqlCjpb24zCpY7kUtu5HfxYxNcbXsHIniCqwNmkih9q3s-OC-z7sS7GNm3p26_ThhcengGvH8HFJA13ngMhng',
       },
     });
 
