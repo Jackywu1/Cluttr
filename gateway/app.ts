@@ -1,11 +1,11 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 /* eslint-disable no-console */
-import server from '.';
-import services from './services';
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
+import app from '.';
 
-server(services)
-  .listen()
-  .then(({ url }) => {
-    console.log(`server running on ${url}`);
-  });
+const PORT = 4000;
+
+(async () => {
+  app().listen(PORT);
+  console.log(`gateway running on port ${PORT}`);
+})();

@@ -1,0 +1,7 @@
+FROM node:latest
+RUN mkdir -p spotify/graph
+WORKDIR /spotify/graph
+COPY . /spotify/graph/
+RUN npm install
+EXPOSE 1337
+CMD ["npm", "start"]

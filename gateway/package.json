@@ -2,14 +2,16 @@
   "name": "proxy",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "start": "nodemon"
+    "start": "npx -p ts-node ts-node app.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@apollo/federation": "^0.26.0",
+    "@apollo/gateway": "^0.33.0",
     "apollo-server": "^2.25.2",
     "axios": "^0.21.1",
     "graphql": "^15.5.1",

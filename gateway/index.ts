@@ -1,50 +1,19 @@
-/* eslint-disable no-undef */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
-/* eslint-disable camelcase */
+/* eslint-disable no-console */
 import { ApolloServer } from 'apollo-server';
-import ApolloService from './services/apollo-service';
+import { ApolloGateway } from '@apollo/gateway';
 
-const server = (services: Array<ApolloService>) => {
-  let queryTypes = `
-    type Query {
-  `;
-
-  let querySubtypes = `
-  `;
-
-  const resolverTypes: any = {
-    Query: {
+const gateway = new ApolloGateway({
+  serviceList: [
+    {
+      name: 'spotify',
+      // url: 'http://spotify:1337',
+      url: 'http://127.0.0.1:1337',
     },
-  };
+  ],
+});
 
-  services.forEach((service) => {
-    const { types, resolvers } = service;
+const buildServer = () => new ApolloServer({ gateway, subscriptions: false });
 
-    const { rootTypes, subTypes } = types;
-    const { rootQueries, subQueries } = resolvers;
-
-    queryTypes += ` ${rootTypes} `;
-    querySubtypes += `${subTypes}`;
-
-    Object.entries(rootQueries).forEach((rootQuery) => {
-      const [query, resolver] = rootQuery;
-      resolverTypes.Query[query] = resolver;
-    });
-
-    Object.entries(subQueries).forEach((subQuery) => {
-      const [query, resolver] = subQuery;
-      resolverTypes[query] = resolver;
-    });
-  });
-
-  queryTypes += ' }';
-  const typeDefs = queryTypes + querySubtypes;
-
-  return new ApolloServer({
-    typeDefs,
-    resolvers: resolverTypes,
-  });
-};
-
-export default server;
+export default buildServer;
