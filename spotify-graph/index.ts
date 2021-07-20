@@ -8,7 +8,15 @@ import schema from './schema';
 const { typeDefs, resolvers } = schema;
 
 const service = () => new ApolloServer({
-  schema: buildFederatedSchema([{ typeDefs, resolvers }]),
+  schema: buildFederatedSchema([
+    {
+      typeDefs,
+      resolvers,
+    },
+  ]),
+  context: ({ req }) => {
+
+  },
 });
 
 export default service;
