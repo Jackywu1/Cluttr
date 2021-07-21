@@ -8,16 +8,20 @@ const gateway = new ApolloGateway({
   serviceList: [
     {
       name: 'spotify',
-      // url: 'http://spotify:1337',
-      url: 'http://127.0.0.1:1337',
+      url: 'http://spotify-graph:1337',
+      // url: 'http://127.0.0.1:1337',
     },
     {
       name: 'twitter',
-      url: 'http://127.0.0.1:2337',
+      url: 'http://twitter-graph:2337',
+      // url: 'http://127.0.0.1:2337',
     },
   ],
 });
 
-const buildServer = () => new ApolloServer({ gateway, subscriptions: false });
+const buildServer = () => new ApolloServer({
+  gateway,
+  subscriptions: false,
+});
 
 export default buildServer;

@@ -9,7 +9,7 @@ const subTypes = `
     id: String!
     name: String!
     user_handle: String!
-    profile_stats: [TwitterProfileStats]
+    profile_stats: TwitterProfileStats!
   }
 
   type TwitterProfileStats {

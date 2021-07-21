@@ -4,9 +4,10 @@ services:
   gateway:
     build: gateway/
     depends_on:
-      - 'spotify'
+      - 'spotify-graph'
+      - 'twitter-graph'
     ports:
-      - '8000:8000'
+      - '4000:4000'
 
   spotify:
     build: spotify/
