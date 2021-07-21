@@ -25,6 +25,11 @@ services:
     ports:
       - '2000:2000'
 
+  twitter-graph:
+    build: twitter-graph/
+    ports:
+      - '2337:2337'
+
   youtube:
     build: youtube/
     depends_on:

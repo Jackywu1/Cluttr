@@ -1,0 +1,7 @@
+FROM node:latest
+RUN mkdir -p twitter/graph
+WORKDIR /twitter/graph
+COPY . /twitter/graph/
+RUN npm install
+EXPOSE 2337
+CMD ["npm", "start"]
