@@ -1,6 +1,6 @@
 const rootTypes = `
-  Tweets: [Tweet!]!
-  TwitterUser: [TwitterUser!]!
+  tweets: [Tweet!]!
+  twitterUser: [TwitterUser!]!
 `;
 
 export default rootTypes;

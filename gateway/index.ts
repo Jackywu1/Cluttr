@@ -11,6 +11,10 @@ const gateway = new ApolloGateway({
       // url: 'http://spotify:1337',
       url: 'http://127.0.0.1:1337',
     },
+    {
+      name: 'twitter',
+      url: 'http://127.0.0.1:2337',
+    },
   ],
 });
 

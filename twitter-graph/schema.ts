@@ -39,6 +39,9 @@ Object.entries(subQueries).forEach((subQuery) => {
   resolverTypes[query] = resolver;
 });
 
+console.log('types', typeDefs);
+console.log('resolvers', resolverTypes);
+
 export default {
   typeDefs,
   resolvers: resolverTypes,

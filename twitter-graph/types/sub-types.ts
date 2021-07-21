@@ -3,7 +3,6 @@ const subTypes = `
     id: String!
     created_at: String!
     text: String!
-    entities: [TwitterUser]!
   }
 
   type TwitterUser {
@@ -20,5 +19,7 @@ const subTypes = `
     listed_count: Int!
   }
 `;
+
+// entities: [TwitterUser]
 
 export default subTypes;
