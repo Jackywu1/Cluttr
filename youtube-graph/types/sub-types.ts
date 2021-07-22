@@ -1,5 +1,9 @@
 const subTypes = `
   type SearchResult {
+    snippet: Snippet!
+  }
+
+  type Snippet {
     publishedAt: String!
     channelId: String!
     title: String!

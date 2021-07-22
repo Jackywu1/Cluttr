@@ -1,13 +1,9 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
-import Thumbnails from './thumbnails';
+import Snippet from './snippet';
 
 interface SearchResult {
-  publishedAt: string;
-  channelId: string;
-  title: string;
-  description: string;
-  thumbnails: Thumbnails;
+  snippet: Snippet;
 }
 
 export default SearchResult;

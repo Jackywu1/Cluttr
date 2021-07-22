@@ -6,6 +6,7 @@ services:
     depends_on:
       - 'spotify-graph'
       - 'twitter-graph'
+      - 'youtube-graph'
     ports:
       - '4000:4000'
 
@@ -37,6 +38,11 @@ services:
       - 'youtubeCache'
     ports:
       - '3000:3000'
+
+  youtube-graph:
+    build: youtube-graph/
+    ports:
+      - '3337:3337'
 
   spotifyCache:
     image: redis:latest
