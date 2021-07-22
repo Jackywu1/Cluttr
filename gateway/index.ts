@@ -9,12 +9,14 @@ const gateway = new ApolloGateway({
     {
       name: 'spotify',
       url: 'http://spotify-graph:1337',
-      // url: 'http://127.0.0.1:1337',
     },
     {
       name: 'twitter',
       url: 'http://twitter-graph:2337',
-      // url: 'http://127.0.0.1:2337',
+    },
+    {
+      name: 'youtube',
+      url: 'http://youtube-graph:3337',
     },
   ],
 });
