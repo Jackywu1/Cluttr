@@ -1,6 +1,14 @@
 version: '3.4'
 
 services:
+  etl:
+    build: etl/
+    depends_on:
+      - 'gateway'
+      - 'redisGraph'
+    ports:
+      - '8000:8000'
+
   gateway:
     build: gateway/
     depends_on:
@@ -49,3 +57,6 @@ services:
 
   youtubeCache:
     image: redis:latest
+
+  redisGraph:
+    image: redislabs/redisgraph:latest

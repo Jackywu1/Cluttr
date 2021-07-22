@@ -1,7 +1,5 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
-import parse from './parse';
+import generate from './load/generate';
 
-export default {
-  parse,
-};
+setTimeout(generate, 5000);
