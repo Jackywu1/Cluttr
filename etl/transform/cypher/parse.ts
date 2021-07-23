@@ -11,19 +11,19 @@ const parse = () => {
   return tweets.map((tweet) => {
     const { id, created_at, text } = tweet;
 
-    return new Query()
-      .create([
-        node('user', 'User', { id }),
-        relation('out', 'tweeted'),
-        node('tweet', 'Tweet', { created_at, text }),
-      ])
-      .build();
+    // return new Query()
+    //   .create([
+    //     node('user', 'User', { id }),
+    //     relation('out', '', 'Tweeted'),
+    //     node('tweet', 'Tweet', { created_at, text }),
+    //   ])
+    //   .build();
+
+    // return `CREATE (user:User { id: ${id} })-[tweeted:Tweeted]->(tweet:Tweet { created_at: ${created_at}, text: ${text} } )`;
+    return `CREATE (user:User { id: ${id} })`;
   });
 };
 
+console.log(parse());
+
 export default parse;
-
-// export default tweets.map((tweet) => {
-
-// })
-//   .forEach(() => {});
