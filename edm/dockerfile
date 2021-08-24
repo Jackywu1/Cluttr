@@ -1,0 +1,7 @@
+FROM node:latest
+RUN mkdir -p /edm
+WORKDIR /edm
+COPY . /edm/
+RUN npm install
+EXPOSE 5000
+CMD ["npm", "start"]
