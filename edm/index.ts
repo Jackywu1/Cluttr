@@ -7,7 +7,10 @@ import routes from './routes';
 export default () => {
   const app = express.Router();
 
-  app.get('/edm/event', routes.eventName);
+  app.use(express.urlencoded({ extended: true }));
+  app.use(express.json());
+
+  app.get('/edm/events', routes.search);
 
   return app;
 };

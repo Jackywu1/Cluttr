@@ -3,7 +3,7 @@
 /* eslint-disable import/extensions */
 import app from '.';
 
-const PORT = 4000;
+const PORT = process.env.PORT || 8000;
 
 (async () => {
   app().listen(PORT);
