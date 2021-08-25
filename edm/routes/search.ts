@@ -21,23 +21,16 @@ export default async (req: Request, res: Response) => {
     const cachedData = await cache.get(`${key}:${value}`);
 
     if (cachedData) {
-      console.log('found data in cache');
-      res.status(201).send(JSON.parse(cachedData));
-    } else {
-      console.log('not inside cache');
-      // Object.entries(req.body).forEach((query) => {
-      //   const [key, value] = query;
-      //   queries[key as string] = value as string;
-      // });
-
-      queries[key as unknown as string] = value as unknown as string;
-
-      const response = await axios.get(`https://edmtrain.com/api/events?${querystring.stringify(queries)}`);
-      const { data } = response.data;
-
-      cache.add(`${key}:${value}`, 10, JSON.stringify(data));
-      res.status(200).send(data);
+      res.status(200).send(JSON.parse(cachedData));
     }
+
+    queries[key as unknown as string] = value as unknown as string;
+
+    const response = await axios.get(`https://edmtrain.com/api/events?${querystring.stringify(queries)}`);
+    const { data } = response.data;
+
+    cache.add(`${key}:${value}`, 10, JSON.stringify(data));
+    res.status(200).send(data);
   } catch (err) {
     res.status(404).send(err);
   }
