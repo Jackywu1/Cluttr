@@ -29,6 +29,8 @@ services:
 
   twitter-graph:
     build: twitter-graph/
+    depends_on:
+      - 'twitterCache'
     ports:
       - '2337:2337'
 
@@ -45,6 +47,9 @@ services:
       - '3337:3337'
 
   spotifyCache:
+    image: redis:latest
+
+  twitterCache:
     image: redis:latest
 
   youtubeCache:
