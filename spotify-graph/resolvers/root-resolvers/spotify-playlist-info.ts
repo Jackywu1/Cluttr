@@ -1,12 +1,19 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 import axios from 'axios';
+import querystring from 'querystring';
 
-const spotifyPlaylistInfo = async () => {
+import PlaylistInfo from '../../interfaces/playlist-info';
+
+const spotifyPlaylistInfo = async (_: any, { id }: { id: string}): Promise<PlaylistInfo> => {
   try {
-    const response = await axios.get('http://spotify:1000/spotify/playlist/info');
+    const query = querystring.stringify({
+      id,
+    });
+
+    const response = await axios.get(`http://spotify:1000/spotify/playlist/info?${query}`);
     // const response = await axios.get('http://127.0.0.1:1000/spotify/playlist/info');
-    return response.data;
+    return response.data as Promise<PlaylistInfo>;
   } catch (err) {
     return err;
   }

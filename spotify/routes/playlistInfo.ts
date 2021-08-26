@@ -13,16 +13,15 @@ const {
 
 const playlistInfo = async (req: Request, res: Response) => {
   try {
-    // const { id } = req.query;
-    const id = '12pRALs7Yz77hnLPlMapqh';
+    const playlistId = req.query.id;
     const access_token = await cache.get(client_id);
 
-    const cachedData = await cache.get(`playlist:${id}`);
+    const cachedData = await cache.get(`playlist:${playlistId}`);
     if (cachedData) {
       res.status(200).send(JSON.parse(cachedData));
     } else {
       const response = await axios({
-        url: `https://api.spotify.com/v1/playlists/${id}/tracks`,
+        url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -31,7 +30,7 @@ const playlistInfo = async (req: Request, res: Response) => {
       });
 
       const { items } = response.data;
-      cache.add(`playlist:${id}`, 10, JSON.stringify(items));
+      cache.add(`playlist:${playlistId}`, 60, JSON.stringify(items));
 
       res.status(200).send(items);
     }

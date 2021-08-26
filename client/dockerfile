@@ -1,0 +1,7 @@
+FROM node:latest
+RUN mkdir -p /client
+WORKDIR /client
+COPY . /client/
+RUN npm install
+EXPOSE 6000
+CMD ["npm", "start"]

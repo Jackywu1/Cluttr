@@ -1,6 +1,6 @@
 const rootTypes = `
-  spotifyPlaylist: [Playlist!]!
-  spotifyPlaylistInfo: [PlaylistInfo!]!
+  spotifyPlaylist(name: String): [Playlist!]!
+  spotifyPlaylistInfo(id: String!): [PlaylistInfo!]!
 `;
 
 export default rootTypes;

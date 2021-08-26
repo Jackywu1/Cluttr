@@ -1,6 +1,13 @@
 version: '3.4'
 
 services:
+  client:
+    build: client/
+    depends_on:
+      - 'gateway'
+    ports:
+      - '6000:6000'
+
   gateway:
     build: gateway/
     depends_on:

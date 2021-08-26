@@ -18,10 +18,8 @@ const userTweets = async (req: Request, res: Response) => {
     const cachedData = await cache.get(`id:${id}`);
 
     if (cachedData) {
-      console.log('from cache');
       res.status(200).send(JSON.parse(cachedData));
     } else {
-      console.log('from api');
       const query = querystring.stringify({
         user_id: id,
       });

@@ -16,22 +16,30 @@ const search = async (req: Request, res: Response) => {
   try {
     // const { q } = req.query;
     const q = 'illenium';
-    const query = querystring.stringify({
-      part: 'snippet',
-      q,
-    });
 
-    const accessToken = await cache.get(client_id);
-    const response = await axios({
-      url: `https://youtube.googleapis.com/youtube/v3/search?${query}}`,
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    const cacheData = await cache.get(q);
+    if (cacheData) {
+      res.status(200).send(JSON.parse(cacheData));
+    } else {
+      const query = querystring.stringify({
+        part: 'snippet',
+        q,
+      });
 
-    const { items } = response.data;
-    res.status(200).send(items);
+      const accessToken = await cache.get(client_id);
+      const response = await axios({
+        url: `https://youtube.googleapis.com/youtube/v3/search?${query}}`,
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      const { items } = response.data;
+      cache.add(q, 60, JSON.stringify(items));
+
+      res.status(200).send(items);
+    }
   } catch (err) {
     res.status(404).send(err);
   }

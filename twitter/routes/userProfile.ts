@@ -18,17 +18,8 @@ const userProfile = async (req: Request, res: Response) => {
     const cachedData = await cache.get(`user:${user}`);
 
     if (cachedData) {
-      console.log('from cache');
       res.status(200).send(JSON.parse(cachedData));
     } else {
-      // const response = await axios({
-      //   url: `https://api.twitter.com/2/users/by/username/${user}?${query}`,
-      //   headers: {
-      //     'User-Agent': 'v2TweetLookupJS',
-      //     Authorization: `Bearer ${bearer_token}`,
-      //   },
-      // });
-
       const query = querystring.stringify({
         'user.fields': 'profile_image_url,public_metrics,pinned_tweet_id,description',
       });
