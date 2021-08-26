@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
-import redis from 'redis';
+import redis, { RedisClient } from 'redis';
 
-const connection = redis.createClient({
+const connection = (): RedisClient => redis.createClient({
   url: 'redis://twitterCache:6379',
 });
 

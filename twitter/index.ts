@@ -5,34 +5,32 @@
 import { Router, Request, Response } from 'express';
 
 import routes from './routes';
-import NormalizedCache from './cache/normalized-cache';
-// import cache from './cache';
+import Options from './options';
 
-const server = (
-  cache: NormalizedCache): Router => {
-  const router = Router();
-
+const server = (options?: Options): Router => {
   const PORT = process.env.PORT || 2000;
 
+  const router = Router();
+
   router.get('/twitter/tweets/:userid', (req: Request, res: Response) => {
-    routes.userTweets(
-      req.params as { userid: string },
-      cache,
-      (err, data) => {
+    const callback = (err: Error | null, data: any | null) => {
       if (err) {
         res.status(400).send(err);
       } else {
         res.status(200).send(data);
       }
-    });
+    }
+
+    routes.userTweets(
+      req.params as { userid: string },
+      options,
+      callback,
+    );
   });
+
   router.get('/twitter/:user', routes.userProfile);
 
   return router;
-
-  // proxy.use(router);
-
-  // return () => proxy.listen(PORT, () => console.log(`Twitter service running on port ${PORT}`));
 };
 
 export default server;

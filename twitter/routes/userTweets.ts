@@ -6,8 +6,7 @@ import axios from 'axios';
 import querystring from 'querystring';
 
 import twitter from '../config/twitter.config';
-import NormalizedCache from '../cache/normalized-cache';
-// import cache from '../cache';
+import Options from '../options';
 
 const {
   bearer_token,
@@ -15,31 +14,45 @@ const {
 
 const userTweets = async (
   { userid }: { userid: string },
-  { add, get }: NormalizedCache,
+  options: Options | undefined,
   callback: (err: null | Error, data: any | null) => void) => {
   try {
-    const cachedData = await get(`id:${userid}`);
+    const query = querystring.stringify({
+      user_id: userid,
+    });
 
-    if (cachedData) {
-      callback(null, JSON.parse(cachedData));
+    const request = axios({
+      url: `https://api.twitter.com/1.1/statuses/user_timeline.json?${query}`,
+      headers: {
+        'User-Agent': 'v2TweetLookupJS',
+        Authorization: `Bearer ${bearer_token}`,
+      },
+    });
+
+    if (options?.cache?.get) {
+      const cachedData = await options!.cache!.get!(`id:${userid}`);
+
+      if (cachedData) {
+        console.log('from cache');
+        callback(null, JSON.parse(cachedData));
+      } else {
+        console.log('not from cache');
+        const response = await request;
+
+        options!.cache!.add!(`id:${userid}`, 60, JSON.stringify(response.data))
+
+        callback(null, response.data);
+      }
     } else {
-      const query = querystring.stringify({
-        user_id: userid,
-      });
+      const response = await request;
 
-      const response = await axios({
-        url: `https://api.twitter.com/1.1/statuses/user_timeline.json?${query}`,
-        headers: {
-          'User-Agent': 'v2TweetLookupJS',
-          Authorization: `Bearer ${bearer_token}`,
-        },
-      });
+      if (options?.cache?.add) {
+        options!.cache!.add!(`id:${userid}`, 60, JSON.stringify(response.data));
+      }
 
-      const { data } = response;
-      add(`id:${userid}`, 60, JSON.stringify(data));
-
-      callback(null, data);
+      callback(null, response.data);
     }
+
   } catch (err) {
     callback(new Error(err), null);
   }
