@@ -21,7 +21,7 @@ const userTweets = async (req: Request, res: Response) => {
       res.status(200).send(JSON.parse(cachedData));
     } else {
       const query = querystring.stringify({
-        user_id: id,
+        user_id: userid,
       });
 
       const response = await axios({
