@@ -3,4 +3,5 @@ export default {
   client_id: '',
   client_secret: '',
   redirect_uri: '',
+  default_search: '',
 };

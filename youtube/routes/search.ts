@@ -15,15 +15,16 @@ const {
 const search = async (req: Request, res: Response) => {
   try {
     // const { q } = req.query;
-    const q = 'illenium';
+    // const q = 'illenium';
+    const { term } = req.query;
 
-    const cacheData = await cache.get(q);
+    const cacheData = await cache.get(term as string);
     if (cacheData) {
       res.status(200).send(JSON.parse(cacheData));
     } else {
       const query = querystring.stringify({
         part: 'snippet',
-        q,
+        q: term as string,
       });
 
       const accessToken = await cache.get(client_id);
@@ -36,7 +37,7 @@ const search = async (req: Request, res: Response) => {
       });
 
       const { items } = response.data;
-      cache.add(q, 60, JSON.stringify(items));
+      cache.add(term as string, 60, JSON.stringify(items));
 
       res.status(200).send(items);
     }

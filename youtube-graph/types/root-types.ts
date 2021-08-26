@@ -1,5 +1,5 @@
 const rootTypes = `
-  searchVideo: [SearchResult!]!
+  searchVideo(search: String): [SearchResult!]!
 `;
 
 export default rootTypes;
