@@ -14,8 +14,8 @@ const {
 
 const userTweets = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    const cachedData = await cache.get(`id:${id}`);
+    const { userid } = req.params;
+    const cachedData = await cache.get(`id:${userid}`);
 
     if (cachedData) {
       res.status(200).send(JSON.parse(cachedData));
@@ -33,7 +33,7 @@ const userTweets = async (req: Request, res: Response) => {
       });
 
       const { data } = response;
-      cache.add(`id:${id}`, 60, JSON.stringify(data));
+      cache.add(`id:${userid}`, 60, JSON.stringify(data));
 
       res.status(200).send(data);
     }

@@ -7,7 +7,7 @@ import routes from './routes';
 const router = () => {
   const app = express.Router();
 
-  app.get('/twitter/tweets/:id', routes.userTweets);
+  app.get('/twitter/tweets/:userid', routes.userTweets);
   app.get('/twitter/:user', routes.userProfile);
 
   return app;

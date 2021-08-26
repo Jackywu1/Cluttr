@@ -1,5 +1,5 @@
 const rootTypes = `
-  tweets: [Tweet!]!
+  tweets(id: String): [Tweet!]!
   twitterUser: TwitterUser!
 `;
 
