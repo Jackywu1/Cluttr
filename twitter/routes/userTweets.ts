@@ -33,19 +33,15 @@ const userTweets = async (
       const cachedData = await options!.cache!.get!(`id:${userid}`);
 
       if (cachedData) {
-        console.log('from cache');
         callback(null, JSON.parse(cachedData));
       } else {
-        console.log('not from cache');
         const response = await request;
-
         options!.cache!.add!(`id:${userid}`, 60, JSON.stringify(response.data))
 
         callback(null, response.data);
       }
     } else {
       const response = await request;
-
       if (options?.cache?.add) {
         options!.cache!.add!(`id:${userid}`, 60, JSON.stringify(response.data));
       }
