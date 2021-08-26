@@ -4,11 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "docker-compose up -d",
+    "build": "docker-compose up -d",
     "down": "docker-compose down --rmi all",
+    "test": "jest --watch",
     "spotify": "npx -p ts-node ts-node spotify/app.ts",
     "twitter": "npx -p ts-node ts-node twitter/app.ts",
     "youtube": "npx -p ts-node ts-node youtube/app.ts"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "@types/supertest": "^2.0.11",
+    "@typescript-eslint/eslint-plugin": "^4.29.3",
+    "@typescript-eslint/parser": "^4.29.3",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.2",
+    "jest": "^27.0.6",
+    "supertest": "^6.1.6",
+    "ts-jest": "^27.0.5"
   },
   "repository": {
     "type": "git",

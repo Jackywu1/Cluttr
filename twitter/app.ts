@@ -3,11 +3,12 @@
 import express from 'express';
 
 import twitter from '.';
+import cache from './cache';
 
 const PORT = process.env.PORT || 2000;
 
 const server = express();
-const app = twitter();
+const app = twitter(cache);
 
 server.use(app);
 

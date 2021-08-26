@@ -1,14 +1,13 @@
 /* eslint-disable no-unused-vars */
-import redis from 'redis';
 import { promisify } from 'util';
 
-const client = redis.createClient({
-  url: 'redis://twitterCache:6379',
-});
+import NormalizedCache from './normalized-cache';
+import connection from './connection';
+import checkCache from './checkCache';
 
-const cache = {
-  add: client.setex.bind(client),
-  get: promisify(client.get).bind(client),
+const cache: NormalizedCache = {
+  add: connection.setex.bind(connection),
+  get: promisify(connection.get).bind(connection),
 };
 
 export default cache;
