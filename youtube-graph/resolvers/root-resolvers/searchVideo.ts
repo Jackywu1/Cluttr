@@ -6,8 +6,6 @@ const searchVideo = async (_: any, { search }: { search: string }) => {
     term: search,
   });
 
-  console.log('query in:', query);
-
   try {
     const response = await axios.get(`http://youtube:3000/youtube/search?${query}`);
 
