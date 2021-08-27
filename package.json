@@ -6,7 +6,7 @@
   "scripts": {
     "build": "docker-compose up -d",
     "down": "docker-compose down --rmi all",
-    "test": "jest --watch",
+    "test": "jest",
     "spotify": "npx -p ts-node ts-node spotify/app.ts",
     "twitter": "npx -p ts-node ts-node twitter/app.ts",
     "youtube": "npx -p ts-node ts-node youtube/app.ts"

@@ -12,22 +12,6 @@ const server = (options?: Options): Router => {
 
   const router = express();
 
-  // router.get('/twitter/tweets/:userid', (req: Request, res: Response) => {
-  //   const callback = (err: Error | null, data: any | null) => {
-  //     if (err) {
-  //       res.status(400).send(err);
-  //     } else {
-  //       res.status(200).send(data);
-  //     }
-  //   }
-
-  //   routes.userTweets(
-  //     req.params as { userid: string },
-  //     options as Options,
-  //     callback,
-  //   );
-  // });
-
   router.get('/twitter/tweets/:userid', (req: Request, res: Response) => {
     routes.userTweets(
       req.params as { userid: string },
