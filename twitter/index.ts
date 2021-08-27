@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
-import { Router, Request, Response } from 'express';
+import express, { Router, Request, Response } from 'express';
 
 import routes from './routes';
 import Options from './options';
@@ -10,25 +10,38 @@ import Options from './options';
 const server = (options?: Options): Router => {
   const PORT = process.env.PORT || 2000;
 
-  const router = Router();
+  const router = express();
+
+  // router.get('/twitter/tweets/:userid', (req: Request, res: Response) => {
+  //   const callback = (err: Error | null, data: any | null) => {
+  //     if (err) {
+  //       res.status(400).send(err);
+  //     } else {
+  //       res.status(200).send(data);
+  //     }
+  //   }
+
+  //   routes.userTweets(
+  //     req.params as { userid: string },
+  //     options as Options,
+  //     callback,
+  //   );
+  // });
 
   router.get('/twitter/tweets/:userid', (req: Request, res: Response) => {
-    const callback = (err: Error | null, data: any | null) => {
-      if (err) {
-        res.status(400).send(err);
-      } else {
-        res.status(200).send(data);
-      }
-    }
-
     routes.userTweets(
       req.params as { userid: string },
       options as Options,
-      callback,
+      (err: Error | null, data: any | null) => {
+        if (err) {
+          res.status(420).send(err);
+        } else {
+          res.status(200).send(data);
+        }
+      },
     );
   });
 
-  // router.get('/twitter/:user', routes.userProfile);
   router.get('/twitter/:user', (req: Request, res: Response) => {
     const callback = (err: Error | null, data: any | null) => {
       if (err) {

@@ -37,21 +37,21 @@ const userTweets = async (
         callback(null, JSON.parse(cachedData));
       } else {
         const response = await axios(requestOptions);
-        options!.cache!.add!(`id:${userid}`, 60, JSON.stringify(response.data))
+        const insert = await options!.cache!.add!(`id:${userid}`, 60, JSON.stringify(response.data));
 
         callback(null, response.data);
       }
     } else {
       const response = await axios(requestOptions);
       if (options?.cache?.add) {
-        options!.cache!.add!(`id:${userid}`, 60, JSON.stringify(response.data));
+        await options!.cache!.add!(`id:${userid}`, 60, JSON.stringify(response.data));
       }
 
       callback(null, response.data);
     }
 
   } catch (err) {
-    callback(new Error(err), null);
+    callback(err, null);
   }
 };
 

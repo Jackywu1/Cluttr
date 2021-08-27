@@ -38,7 +38,7 @@ const userProfile = async (
         callback(null, JSON.parse(cachedData));
       } else {
         const response = await axios(requestOptions);
-        options!.cache!.add(`user:${user}`, 60, JSON.stringify(response.data));
+        await options!.cache!.add(`user:${user}`, 60, JSON.stringify(response.data));
 
         callback(null, response.data);
       }
@@ -46,7 +46,7 @@ const userProfile = async (
       const response = await axios(requestOptions);
 
       if (options?.cache?.add) {
-        options!.cache!.add(`user:${user}`, 60, JSON.stringify(response.data));
+        await options!.cache!.add(`user:${user}`, 60, JSON.stringify(response.data));
       }
 
       callback(null, response.data);
@@ -55,37 +55,5 @@ const userProfile = async (
     callback(new Error(err), null);
   }
 }
-
-// const userProfile = async (req: Request, res: Response) => {
-//   try {
-//     const { user } = req.params;
-//     const cachedData = await cache().get(`user:${user}`);
-
-//     if (cachedData) {
-//       res.status(200).send(JSON.parse(cachedData));
-//     } else {
-//       const query = querystring.stringify({
-//         'user.fields': 'profile_image_url,public_metrics,pinned_tweet_id,description',
-//       });
-
-//       const response = await axios.get(
-//         `https://api.twitter.com/2/users/by/username/${user}?${query}`,
-//         {
-//           headers: {
-//             'User-Agent': 'v2TweetLookupJS',
-//             Authorization: `Bearer ${bearer_token}`,
-//           },
-//         },
-//       );
-
-//       const { data } = response.data;
-//       cache().add(`user:${user}`, 60, JSON.stringify(data));
-
-//       res.status(200).send(data);
-//     }
-//   } catch (err) {
-//     res.status(404).send(err);
-//   }
-// };
 
 export default userProfile;

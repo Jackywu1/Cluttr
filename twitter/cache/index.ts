@@ -8,7 +8,7 @@ const createCache = () => {
   const client = connection();
 
   const cache: NormalizedCache = {
-    add: client.setex.bind(client),
+    add: promisify(client.setex).bind(client),
     get: promisify(client.get).bind(client),
   };
 

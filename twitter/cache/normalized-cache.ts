@@ -1,4 +1,4 @@
 export default interface NormalizedCache {
-  add: (key: string, seconds: number, value: string) => boolean;
+  add: (key: string, seconds: number, value: string) => Promise<string>;
   get: (key: string) => Promise<any | undefined>;
 }
