@@ -7,7 +7,6 @@ import request from 'supertest';
 
 import twitter from '../..';
 import Tweet from '../../../twitter-graph/interfaces/tweet';
-// import NormalizedCache from '../cache/normalized-cache';
 import mocks from '../mocks';
 
 jest.mock('../../../twitter/cache');

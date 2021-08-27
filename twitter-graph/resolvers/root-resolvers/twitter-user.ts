@@ -14,12 +14,8 @@ const twitterUser = async (_: any, { user }: { user: string }): Promise<TwitterU
 
     const { data } = response.data;
 
-    console.log('before:', data);
-
     data.user_handle = data.username;
     data.profile_stats = data.public_metrics as TwitterProfileStats;
-
-    console.log('after:', data);
 
     return data as Promise<TwitterUser>;
   } catch (err) {
