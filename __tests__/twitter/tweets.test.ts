@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
-import * as request from 'supertest';
+import request from 'supertest';
 
 import twitter from '../../twitter';
 import NormalizedCache from '../../twitter/cache/normalized-cache';

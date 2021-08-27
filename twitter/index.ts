@@ -23,12 +23,27 @@ const server = (options?: Options): Router => {
 
     routes.userTweets(
       req.params as { userid: string },
-      options,
+      options as Options,
       callback,
     );
   });
 
-  router.get('/twitter/:user', routes.userProfile);
+  // router.get('/twitter/:user', routes.userProfile);
+  router.get('/twitter/:user', (req: Request, res: Response) => {
+    const callback = (err: Error | null, data: any | null) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    };
+
+    routes.userProfile(
+      req.params as { user: string },
+      options as Options,
+      callback,
+    );
+  });
 
   return router;
 };
