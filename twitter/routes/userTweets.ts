@@ -12,6 +12,7 @@ const userTweets = async (
   callback: (err: null | Error, data: any | null) => void
 ): Promise<void> => {
   try {
+    console.log('hello from my twitter service');
     const query = querystring.stringify({
       user_id: userid,
     });
