@@ -20,7 +20,7 @@ const userTweets = async (
       url: `https://api.twitter.com/1.1/statuses/user_timeline.json?${query}`,
       headers: {
         'User-Agent': 'v2TweetLookupJS',
-        Authorization: `Bearer ${process.env.bearer_token}`,
+        Authorization: `Bearer ${process.env.twitter_bearer_token}`,
       },
     };
 
@@ -43,7 +43,6 @@ const userTweets = async (
 
       callback(null, data);
     }
-
   } catch (err) {
     callback(err, null);
   }

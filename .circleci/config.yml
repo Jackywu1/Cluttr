@@ -1,9 +1,10 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@4.1
+  node: circleci/node@latest
+  docker: circleci/docker@latest
 jobs:
-  build:
+  test-build:
     docker:
       - image: 'jackywu1/twitter:latest'
     steps:
@@ -14,4 +15,8 @@ jobs:
 workflows:
   test-script:
     jobs:
-      - build
+      - test-build
+  build-image:
+    jobs:
+      - docker/publish:
+        - image: 'jackywu1/twitter:latest'

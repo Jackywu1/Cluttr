@@ -5,13 +5,8 @@ import { Request, Response } from 'express';
 import axios, { AxiosRequestConfig } from 'axios';
 import querystring from 'querystring';
 
-// import twitter from '../config/twitter.config';
 import cache from '../cache';
 import Options from '../options';
-
-// const {
-//   bearer_token,
-// } = twitter;
 
 const userProfile = async (
   { user }: { user: string },
@@ -28,7 +23,7 @@ const userProfile = async (
       headers: {
         'User-Agent': 'v2TweetLookupJS',
         // Authorization: `Bearer ${bearer_token}`,
-        Authorization: `Bearer ${process.env.bearer_token}`
+        Authorization: `Bearer ${process.env.twitter_bearer_token}`
       },
     };
 
