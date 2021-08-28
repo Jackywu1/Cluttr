@@ -4,12 +4,12 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import querystring from 'querystring';
 
-import twitter from '../config/twitter.config';
+// import twitter from '../config/twitter.config';
 import Options from '../options';
 
-const {
-  bearer_token,
-} = twitter;
+// const {
+//   bearer_token,
+// } = twitter;
 
 const userTweets = async (
   { userid }: { userid: string },
