@@ -2,6 +2,8 @@
 /* eslint-disable no-console */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
+require('dotenv').config();
+
 import express, { Router, Express, Request, Response } from 'express';
 
 import routes from './routes';

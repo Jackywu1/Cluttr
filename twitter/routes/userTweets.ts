@@ -25,7 +25,8 @@ const userTweets = async (
       url: `https://api.twitter.com/1.1/statuses/user_timeline.json?${query}`,
       headers: {
         'User-Agent': 'v2TweetLookupJS',
-        Authorization: `Bearer ${bearer_token}`,
+        // Authorization: `Bearer ${bearer_token}`,
+        Authorization: `Bearer ${process.env.bearer_token}`,
       },
     };
 

@@ -9,9 +9,9 @@ import twitter from '../config/twitter.config';
 import cache from '../cache';
 import Options from '../options';
 
-const {
-  bearer_token,
-} = twitter;
+// const {
+//   bearer_token,
+// } = twitter;
 
 const userProfile = async (
   { user }: { user: string },
@@ -27,7 +27,8 @@ const userProfile = async (
       url: `https://api.twitter.com/2/users/by/username/${user}?${query}`,
       headers: {
         'User-Agent': 'v2TweetLookupJS',
-        Authorization: `Bearer ${bearer_token}`,
+        // Authorization: `Bearer ${bearer_token}`,
+        Authorization: `Bearer ${process.env.bearer_token}`
       },
     };
 
