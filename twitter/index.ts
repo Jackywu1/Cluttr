@@ -20,7 +20,7 @@ const server = (options?: Options): Router => {
       options as Options,
       (err: Error | null, data: any | null) => {
         if (err) {
-          res.status(420).send(err);
+          res.status(400).send(err);
         } else {
           res.status(200).send(data);
         }
