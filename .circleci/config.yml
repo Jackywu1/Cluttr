@@ -1,0 +1,17 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.1
+jobs:
+  build:
+    docker:
+      - image: 'jackywu1/twitter:latest'
+    steps:
+      - checkout
+      - node/install-packages
+      - run: npm install && npm test
+
+workflows:
+  test-script:
+    jobs:
+      - build
