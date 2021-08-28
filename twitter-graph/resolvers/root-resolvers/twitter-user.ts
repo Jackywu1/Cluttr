@@ -10,9 +10,9 @@ const twitterUser = async (_: any, { user }: { user: string }): Promise<TwitterU
   try {
     // const username = 'illenium';
     // const response = await axios.get(`http://127.0.0.1:2000/twitter/${username}`);
-    const response = await axios.get(`http://twitter:2000/twitter/${user}`);
+    const { data: response } = await axios.get(`http://twitter:2000/twitter/${user}`);
 
-    const { data } = response.data;
+    const { data } = response;
 
     data.user_handle = data.username;
     data.profile_stats = data.public_metrics as TwitterProfileStats;

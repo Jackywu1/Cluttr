@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "docker-compose up -d",
-    "down": "docker-compose down --rmi all",
+    "down": "docker-compose down --rmi all && docker volume prune",
     "test": "jest",
     "spotify": "npx -p ts-node ts-node spotify/app.ts",
     "twitter": "npx -p ts-node ts-node twitter/app.ts",

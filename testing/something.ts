@@ -21,7 +21,7 @@ const parsed = parse(
         listed_count
       }
     }
-  }`
+  }`,
 );
 
 console.log(parsed);

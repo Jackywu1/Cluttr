@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable camelcase */
-import { Request, response, Response } from 'express';
+import { Request, Response } from 'express';
 import axios, { AxiosRequestConfig } from 'axios';
 import querystring from 'querystring';
 
@@ -37,19 +37,19 @@ const userProfile = async (
       if (cachedData) {
         callback(null, JSON.parse(cachedData));
       } else {
-        const response = await axios(requestOptions);
-        await options!.cache!.add(`user:${user}`, 60, JSON.stringify(response.data));
+        const { data } = await axios(requestOptions);
+        await options!.cache!.add(`user:${user}`, 60, JSON.stringify(data));
 
-        callback(null, response.data);
+        callback(null, data);
       }
     } else {
-      const response = await axios(requestOptions);
+      const { data } = await axios(requestOptions);
 
       if (options?.cache?.add) {
-        await options!.cache!.add(`user:${user}`, 60, JSON.stringify(response.data));
+        await options!.cache!.add(`user:${user}`, 60, JSON.stringify(data));
       }
 
-      callback(null, response.data);
+      callback(null, data);
     }
   } catch (err) {
     callback(new Error(err), null);

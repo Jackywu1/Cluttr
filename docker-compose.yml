@@ -10,6 +10,8 @@ services:
 
   gateway:
     build: gateway/
+    volumes:
+      - ./gateway/:/gateway/
     depends_on:
       - 'spotify-graph'
       - 'twitter-graph'
@@ -19,6 +21,8 @@ services:
 
   spotify:
     build: spotify/
+    volumes:
+      - ./spotify/:/spotify/
     depends_on:
       - 'spotifyCache'
     ports:
@@ -26,16 +30,22 @@ services:
 
   spotify-graph:
     build: spotify-graph/
+    volumes:
+      - ./spotify-graph/:/spotify-graph/
     ports:
       - '1337:1337'
 
   twitter:
     build: twitter/
+    volumes:
+      - ./twitter/:/twitter/
     ports:
       - '2000:2000'
 
   twitter-graph:
     build: twitter-graph/
+    volumes:
+      - ./twitter-graph/:/twitter-graph/
     depends_on:
       - 'twitterCache'
     ports:
@@ -43,6 +53,8 @@ services:
 
   youtube:
     build: youtube/
+    volumes:
+      - ./youtube/:/youtube/
     depends_on:
       - 'youtubeCache'
     ports:
@@ -50,6 +62,8 @@ services:
 
   youtube-graph:
     build: youtube-graph/
+    volumes:
+      - ./youtube-graph/:/youtube-graph/
     ports:
       - '3337:3337'
 

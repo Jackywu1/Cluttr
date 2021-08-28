@@ -1,7 +1,7 @@
 FROM node:latest
-RUN mkdir -p youtube/graph
-WORKDIR /youtube/graph
-COPY . /youtube/graph/
+RUN mkdir -p youtube-graph
+WORKDIR /youtube-graph
+COPY . /youtube-graph/
 RUN npm install
 EXPOSE 3337
 CMD ["npm", "start"]

@@ -20,7 +20,7 @@ const playlistInfo = async (req: Request, res: Response) => {
     if (cachedData) {
       res.status(200).send(JSON.parse(cachedData));
     } else {
-      const response = await axios({
+      const { data } = await axios({
         url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
         method: 'GET',
         headers: {
@@ -29,7 +29,7 @@ const playlistInfo = async (req: Request, res: Response) => {
         },
       });
 
-      const { items } = response.data;
+      const { items } = data;
       cache.add(`playlist:${playlistId}`, 60, JSON.stringify(items));
 
       res.status(200).send(items);
