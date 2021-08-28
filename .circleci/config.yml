@@ -1,8 +1,8 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@latest
-  docker: circleci/docker@latest
+  node: circleci/node@4.7
+  docker: circleci/docker@1.7.0
 jobs:
   test-build:
     docker:
@@ -16,7 +16,3 @@ workflows:
   test-script:
     jobs:
       - test-build
-  build-image:
-    jobs:
-      - docker/publish:
-        - image: 'jackywu1/twitter:latest'
