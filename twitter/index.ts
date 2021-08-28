@@ -4,7 +4,7 @@
 /* eslint-disable import/extensions */
 require('dotenv').config();
 
-import express, { Router, Express, Request, Response } from 'express';
+import express, { Router, Request, Response } from 'express';
 
 import routes from './routes';
 import Options from './options';
