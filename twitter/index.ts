@@ -10,7 +10,7 @@ import routes from './routes';
 import Options from './options';
 
 const server = (options: Options = {}): Router => {
-  const PORT = process.env.PORT || 2000;
+  const PORT = process.env.twitter_PORT || 2000;
 
   const router: Router = express();
 
