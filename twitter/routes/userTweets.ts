@@ -4,12 +4,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import querystring from 'querystring';
 
-// import twitter from '../config/twitter.config';
 import Options from '../options';
-
-// const {
-//   bearer_token,
-// } = twitter;
 
 const userTweets = async (
   { userid }: { userid: string },
@@ -25,7 +20,6 @@ const userTweets = async (
       url: `https://api.twitter.com/1.1/statuses/user_timeline.json?${query}`,
       headers: {
         'User-Agent': 'v2TweetLookupJS',
-        // Authorization: `Bearer ${bearer_token}`,
         Authorization: `Bearer ${process.env.bearer_token}`,
       },
     };
