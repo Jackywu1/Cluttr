@@ -39,6 +39,8 @@ services:
     build: twitter/
     volumes:
       - ./twitter/:/twitter/
+    depends_on:
+      - 'twitterCache'
     ports:
       - '2000:2000'
 
