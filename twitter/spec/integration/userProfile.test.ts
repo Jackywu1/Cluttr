@@ -13,7 +13,7 @@ describe('GET /twitter/:user', () => {
     const instance = twitter();
 
     const { statusCode, body } = await request(instance).get(`/twitter/${testuser}`);
-    const user = body.data;
+    const { data: user } = body;
 
     expect(statusCode).toBe(200);
 

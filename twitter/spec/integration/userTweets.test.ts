@@ -14,11 +14,11 @@ jest.mock('../../../twitter/cache');
 describe('GET /twitter/tweets/:userid', () => {
   const testuserid = '2187489492'; // illenium
   const cache = mocks.mockCache();
-  const testtweet: Tweet = {
-    id: '1427681723303661600',
-    created_at: 'Tue Aug 17 17:20:22 +0000 2021',
-    text: 'I sit in the shade cuz I burn easy https://t.co/c7s5p3opAg',
-  };
+  // const testtweet: Tweet = {
+  //   id: '1427681723303661600',
+  //   created_at: 'Tue Aug 17 17:20:22 +0000 2021',
+  //   text: 'I sit in the shade cuz I burn easy https://t.co/c7s5p3opAg',
+  // };
 
   test('responds with data', async () => {
     const instance = twitter();

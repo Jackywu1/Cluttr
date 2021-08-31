@@ -8,6 +8,16 @@ services:
   #   ports:
   #     - '6000:6000'
 
+  # proxy:
+  #   build: proxy/
+  #   volumes:
+  #     - ./proxy/:/proxy/
+  #   depends_on:
+  #     - 'gateway1'
+  #     - 'gateway2'
+  #   ports:
+  #     - '8080:8080'
+
   gateway:
     build: gateway/
     volumes:
@@ -18,6 +28,28 @@ services:
       - 'youtube-graph'
     ports:
       - '8000:8000'
+
+  # gateway1:
+  #   build: gateway/
+  #   volumes:
+  #     - ./gateway/:/gateway1/
+  #   depends_on:
+  #     - 'spotify-graph'
+  #     - 'twitter-graph'
+  #     - 'youtube-graph'
+  #   ports:
+  #     - '8000:8000'
+
+  # gateway2:
+  #   build: gateway/
+  #   volumes:
+  #     - ./gateway/:/gateway2/
+  #   depends_on:
+  #     - 'spotify-graph'
+  #     - 'twitter-graph'
+  #     - 'youtube-graph'
+  #   ports:
+  #     - '8000:8000'
 
   spotify:
     build: spotify/

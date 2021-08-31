@@ -1,16 +1,18 @@
 /* eslint-disable no-unused-vars */
-import redis from 'redis';
 import { promisify } from 'util';
 
-const client = redis.createClient({
-  url: 'redis://spotifyCache:6379',
-});
+import NormalizedCache from './normalized-cache';
+import connection from './connection';
 
-// const client = redis.createClient();
+const createCache = () => {
+  const client = connection();
 
-const cache = {
-  add: client.setex.bind(client),
-  get: promisify(client.get).bind(client),
+  const cache: NormalizedCache = {
+    add: promisify(client.setex).bind(client),
+    get: promisify(client.get).bind(client),
+  };
+
+  return cache;
 };
 
-export default cache;
+export default createCache;

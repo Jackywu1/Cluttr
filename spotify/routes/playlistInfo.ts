@@ -1,41 +1,38 @@
 /* eslint-disable camelcase */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
-import { Request, Response } from 'express';
+// import { Request, Response } from 'express';
 import axios from 'axios';
+import Options from '../options';
 
-import spotify from '../config/spotify.config';
-import cache from '../cache';
+const request = async (id: string, token: string) => await axios({
+  url: `https://api.spotify.com/v1/playlists/${id}/tracks`,
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
+  },
+});
 
-const {
-  client_id,
-} = spotify;
-
-const playlistInfo = async (req: Request, res: Response) => {
+const playlistInfo = async (
+  { id }: { id: string },
+  { cache }: Options,
+  callback: (err: Error | null, data: any | null) => void,
+) => {
   try {
-    const playlistId = req.query.id;
-    const access_token = await cache.get(client_id);
-
-    const cachedData = await cache.get(`playlist:${playlistId}`);
+    const access_token = await cache.get(process.env.client_id as string);
+    const cachedData = await cache.get(`playlist:${id}`);
     if (cachedData) {
-      res.status(200).send(JSON.parse(cachedData));
+      callback(null, JSON.parse(cachedData));
     } else {
-      const { data } = await axios({
-        url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${access_token}`,
-        },
-      });
-
+      const { data } = await request(id, access_token);
       const { items } = data;
-      cache.add(`playlist:${playlistId}`, 60, JSON.stringify(items));
 
-      res.status(200).send(items);
+      cache.add(`playlist:${id}`, 60, JSON.stringify(items));
+      callback(null, items);
     }
   } catch (err) {
-    res.status(404).send(err);
+    callback(err, null);
   }
 };
 

@@ -31,7 +31,7 @@ const userTweets = async (
         callback(null, JSON.parse(cachedData));
       } else {
         const { data } = await axios(requestOptions);
-        const insert = await options!.cache!.add!(`id:${userid}`, 60, JSON.stringify(data));
+        await options!.cache!.add!(`id:${userid}`, 60, JSON.stringify(data));
 
         callback(null, data);
       }

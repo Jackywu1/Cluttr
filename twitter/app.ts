@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 2000;
 
 const server = express();
 const app = twitter({
-  cache: cache()
+  cache: cache(),
 });
 
 server.use(app);

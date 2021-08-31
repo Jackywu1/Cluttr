@@ -1,40 +1,39 @@
 /* eslint-disable import/extensions */
 /* eslint-disable camelcase */
 /* eslint-disable import/no-unresolved */
-import { Request, Response } from 'express';
 import axios from 'axios';
 
-import spotify from '../config/spotify.config';
-import cache from '../cache';
+import Options from '../options';
 
-const {
-  client_id,
-} = spotify;
+const request = async (accessCode: string): Promise<any> => {
+  return axios({
+    url: 'https://api.spotify.com/v1/me/playlists',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessCode}`,
+    }
+  });
+};
 
-const playlist = async (req: Request, res: Response) => {
+const playlist = async (
+  { cache }: Options,
+  callback: (err: Error | null, data: any | null) => void,
+) => {
   try {
-    const accessCode = await cache.get(client_id);
+    const accessCode = await cache.get(process.env.client_id as string);
     const cachedData = await cache.get(`playlist:user:${accessCode}`);
 
     if (cachedData) {
-      res.status(200).send(JSON.parse(cachedData));
+      callback(null, JSON.parse(cachedData));
     } else {
-      const { data } = await axios({
-        url: 'https://api.spotify.com/v1/me/playlists',
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessCode}`,
-        },
-      });
-
+      const { data } = await request(accessCode);
       const { items } = data;
-      cache.add(`playlist:user:${accessCode}`, 60, JSON.stringify(items));
 
-      res.status(200).send(items);
+      await cache.add(`playlist:user:${accessCode}`, 60, JSON.stringify(items));
+      callback(null, items);
     }
   } catch (err) {
-    res.status(404).send(err);
+    callback(new Error(err), null);
   }
 };
 

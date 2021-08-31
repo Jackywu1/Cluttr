@@ -3,22 +3,16 @@
 import { Request, Response } from 'express';
 import querystring from 'querystring';
 
-import spotify from '../config/spotify.config';
-
-const {
-  client_id, redirect_uri, state,
-} = spotify;
-
 const authenticate = (req: Request, res: Response) => {
   const query = querystring.stringify({
-    client_id,
+    client_id: process.env.client_id as string,
     response_type: 'code',
-    redirect_uri,
-    state,
+    redirect_uri: 'http://127.0.0.1:1000/spotify/authorize',
+    state: process.env.state as string,
     show_dialog: true,
-  });
+  })
 
-  res.redirect(`https://accounts.spotify.com/authorize?${query}`);
+  return res.redirect(`https://accounts.spotify.com/authorize?${query}`);
 };
 
 export default authenticate;

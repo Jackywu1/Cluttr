@@ -10,9 +10,7 @@ import routes from './routes';
 import Options from './options';
 
 const server = (options: Options = {}): Router => {
-  const PORT = process.env.twitter_PORT || 2000;
-
-  const router: Router = express();
+  const router = express();
 
   router.get('/twitter/tweets/:userid', (req: Request, res: Response) => {
     routes.userTweets(

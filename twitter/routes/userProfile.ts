@@ -1,11 +1,9 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable camelcase */
-import { Request, Response } from 'express';
 import axios, { AxiosRequestConfig } from 'axios';
 import querystring from 'querystring';
 
-import cache from '../cache';
 import Options from '../options';
 
 const userProfile = async (
@@ -22,7 +20,6 @@ const userProfile = async (
       url: `https://api.twitter.com/2/users/by/username/${user}?${query}`,
       headers: {
         'User-Agent': 'v2TweetLookupJS',
-        // Authorization: `Bearer ${bearer_token}`,
         Authorization: `Bearer ${process.env.twitter_bearer_token}`
       },
     };

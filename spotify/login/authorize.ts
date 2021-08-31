@@ -2,46 +2,30 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-buffer-constructor */
 /* eslint-disable camelcase */
-import { Request, Response } from 'express';
 import axios from 'axios';
 import querystring from 'querystring';
 
-import spotify from '../config/spotify.config';
-import cache from '../cache';
-
-const {
-  client_id,
-  client_secret,
-  redirect_uri,
-} = spotify;
-
-const authorize = async (req: Request, res: Response) => {
+const authorize = async (code: string): Promise<string | Error> => {
   try {
-    const { code } = req.query;
-
     const data = querystring.stringify({
       grant_type: 'authorization_code',
       code: code as string,
-      redirect_uri,
+      redirect_uri: 'http://127.0.0.1:1000/spotify/authorize',
     });
 
-    const response = await axios({
+    const { data: response } = await axios({
       url: 'https://accounts.spotify.com/api/token',
       method: 'post',
       data,
       headers: {
-        Authorization: `Basic ${Buffer.from(`${client_id}:${client_secret}`).toString('base64')}`,
+        Authorization: `Basic ${Buffer.from(`${process.env.client_id as string}:${process.env.client_secret as string}`).toString('base64')}`,
       },
     });
 
-    const { access_token } = response.data;
-    cache.add(client_id, 3600, access_token);
-
-    // if (req.body.redirect) res.redirect(200, req.body.redirect);
-    res.redirect(200, '/spotify/playlist');
+    return response.access_token as Promise<string>;
   } catch (err) {
-    res.status(500).send(err);
+    return new Promise((_, reject) => reject(new Error(err)));
   }
-};
+}
 
 export default authorize;
