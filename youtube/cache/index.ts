@@ -1,15 +1,18 @@
 /* eslint-disable no-unused-vars */
-import redis from 'redis';
 import { promisify } from 'util';
 
-const client = redis.createClient({
-  url: 'redis://youtubeCache:6379',
-  // url: 'redis://127.0.0.1:6379',
-});
+import connection from './connection';
+import NormalizedCache from './normalized-cache';
 
-const cache = {
-  add: client.setex.bind(client),
-  get: promisify(client.get).bind(client),
-};
+const createCache = (): NormalizedCache => {
+  const client = connection();
+  const cache: NormalizedCache = {
+    add: promisify(client.setex).bind(client),
+    get: promisify(client.get).bind(client),
+  };
 
-export default cache;
+  return cache;
+}
+
+
+export default createCache;

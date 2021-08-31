@@ -5,28 +5,55 @@ import { Request, Response } from 'express';
 import axios from 'axios';
 import querystring from 'querystring';
 
-import youtube from '../config/youtube.config';
-import cache from '../cache';
-
-const {
-  client_id, client_secret, redirect_uri,
-} = youtube;
+import Options from '../options';
 
 const EXPIRATION = parseInt(process.env.EXPIRATION!, 10) || 3600;
 
-const authorize = async (req: Request, res: Response) => {
+// const authorize = async (req: Request, res: Response) => {
+//   try {
+//     const { code } = req.query;
+
+//     const query = querystring.stringify({
+//       client_id,
+//       client_secret,
+//       code: code as string,
+//       grant_type: 'authorization_code',
+//       redirect_uri,
+//     });
+
+//     const response = await axios({
+//       url: `https://oauth2.googleapis.com/token?${query}`,
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/x-www-form-urlencoded',
+//       },
+//     });
+
+//     const { access_token } = response.data;
+//     cache.add(client_id, EXPIRATION as number, access_token);
+
+//     const redirect = querystring.stringify({
+//       term: youtube.default_search,
+//     });
+
+//     res.redirect(200, `/youtube/search?${redirect}`);
+//   } catch (err) {
+//     res.status(500).send(err);
+//   }
+// };
+
+const authorize = async (req: Request, res: Response, { cache }: Options): Promise<string | Error> => {
   try {
     const { code } = req.query;
-
     const query = querystring.stringify({
-      client_id,
-      client_secret,
+      client_id: process.env.client_id as string,
+      client_secret: process.env.client_secret as string,
       code: code as string,
       grant_type: 'authorization_code',
-      redirect_uri,
+      redirect_uri: 'http://127.0.0.1:3000/youtube/authorize',
     });
 
-    const response = await axios({
+    const { data } = await axios({
       url: `https://oauth2.googleapis.com/token?${query}`,
       method: 'POST',
       headers: {
@@ -34,16 +61,19 @@ const authorize = async (req: Request, res: Response) => {
       },
     });
 
-    const { access_token } = response.data;
-    cache.add(client_id, EXPIRATION as number, access_token);
+    const { access_token: accessToken } = data;
+    cache.add(process.env.client_id as string, EXPIRATION as number, accessToken);
 
-    const redirect = querystring.stringify({
-      term: youtube.default_search,
-    });
+    return accessToken as Promise<string>;
 
-    res.redirect(200, `/youtube/search?${redirect}`);
+    // const redirect = querystring.stringify({
+    //   term: process.env.default_search as string,
+    // });
+
+    // res.redirect(200, `/youtube/search?${redirect}`);
   } catch (err) {
-    res.status(500).send(err);
+    return new Promise((_, reject) => reject(new Error(err)));
+    // res.status(500).send(err);
   }
 };
 
