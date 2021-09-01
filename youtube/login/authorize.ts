@@ -42,13 +42,12 @@ const EXPIRATION = parseInt(process.env.EXPIRATION!, 10) || 3600;
 //   }
 // };
 
-const authorize = async (req: Request, res: Response, { cache }: Options): Promise<string | Error> => {
+const authorize = async (code: string): Promise<string | Error> => {
   try {
-    const { code } = req.query;
     const query = querystring.stringify({
       client_id: process.env.client_id as string,
       client_secret: process.env.client_secret as string,
-      code: code as string,
+      code: code,
       grant_type: 'authorization_code',
       redirect_uri: 'http://127.0.0.1:3000/youtube/authorize',
     });
@@ -61,19 +60,9 @@ const authorize = async (req: Request, res: Response, { cache }: Options): Promi
       },
     });
 
-    const { access_token: accessToken } = data;
-    cache.add(process.env.client_id as string, EXPIRATION as number, accessToken);
-
-    return accessToken as Promise<string>;
-
-    // const redirect = querystring.stringify({
-    //   term: process.env.default_search as string,
-    // });
-
-    // res.redirect(200, `/youtube/search?${redirect}`);
+    return data.access_token as Promise<string>;
   } catch (err) {
     return new Promise((_, reject) => reject(new Error(err)));
-    // res.status(500).send(err);
   }
 };
 

@@ -20,9 +20,10 @@ const server = (options: Options): Router => {
   // authentication / authorization
   router.get('/youtube/login', auth.authenticate);
   router.get('/youtube/authorize', async (req: Request, res: Response) => {
-    const accessToken = await auth.authorize(req as Request, res as Response, options as Options);
-    cache.add(process.env.client_id as string, expiration, accessToken as string);
+    const { code } = req.query;
+    const accessToken = await auth.authorize(code as string);
 
+    await cache.add(process.env.client_id as string, expiration, accessToken as string);
     const redirect = querystring.stringify({
       term: process.env.default_search as string,
     });
@@ -31,7 +32,13 @@ const server = (options: Options): Router => {
   });
 
   // API routes
-  router.get('/youtube/search', routes.search);
+  router.get('/youtube/search', (req: Request, res: Response) => {
+    routes.search(
+      req.query as { term: string },
+      options as Options,
+      (err: Error | null, data: any | null): void => { err ? res.status(400).send(err) : res.status(200).send(data); }
+    );
+  });
 
   return router;
 };
