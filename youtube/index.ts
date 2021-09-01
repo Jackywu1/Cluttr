@@ -1,24 +1,46 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
-import express, { Request, Response } from 'express';
+require('dotenv').config();
+
+import express, { Router, Request, Response } from 'express';
+import querystring from 'querystring';
 
 import auth from './login';
 import routes from './routes';
 
-const router = () => {
-  const app = express.Router();
+import Options from './options';
+import NormalizedCache from './cache/normalized-cache';
 
-  // check authorization
+const server = (options: Options): Router => {
+  const cache: NormalizedCache = options.cache;
+  const expiration = parseInt(process.env.EXPIRATION as string) || 3600;
+
+  const router: Router = express();
 
   // authentication / authorization
-  app.get('/youtube/login', (req: Request, res: Response) => res.redirect(200, '/youtube/authenticate'));
-  app.get('/youtube/authenticate', (req: Request, res: Response) => auth.authenticate(req, res));
-  app.get('/youtube/authorize', (req: Request, res: Response) => auth.authorize(req, res));
+  router.get('/youtube/login', auth.authenticate);
+  router.get('/youtube/authorize', async (req: Request, res: Response) => {
+    const { code } = req.query;
+    const accessToken = await auth.authorize(code as string);
+
+    await cache.add(process.env.client_id as string, expiration, accessToken as string);
+    const redirect = querystring.stringify({
+      term: process.env.default_search as string,
+    });
+
+    res.status(200).redirect(`/youtube/search?${redirect}`);
+  });
 
   // API routes
-  app.get('/youtube/search', routes.search);
+  router.get('/youtube/search', (req: Request, res: Response) => {
+    routes.search(
+      req.query as { term: string },
+      options as Options,
+      (err: Error | null, data: any | null): void => { err ? res.status(400).send(err) : res.status(200).send(data); }
+    );
+  });
 
-  return app;
+  return router;
 };
 
-export default router;
+export default server;

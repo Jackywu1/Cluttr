@@ -2,12 +2,15 @@
 /* eslint-disable import/no-unresolved */
 import express from 'express';
 
-import edm from '.';
+import event from '.';
+import cache from './cache';
 
-const PORT = process.env.PORT || 5000;
+const PORT: number = parseInt(process.env.PORT as string) || 4000;
 
 const server = express();
-const app = edm();
+const app = event({
+  cache: cache(),
+});
 
 server.use(app);
 

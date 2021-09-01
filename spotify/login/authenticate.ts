@@ -3,7 +3,7 @@
 import { Request, Response } from 'express';
 import querystring from 'querystring';
 
-const authenticate = (req: Request, res: Response) => {
+const authenticate = (req: Request, res: Response): void => {
   const query = querystring.stringify({
     client_id: process.env.client_id as string,
     response_type: 'code',

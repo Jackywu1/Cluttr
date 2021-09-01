@@ -3,7 +3,7 @@
 /* eslint-disable import/extensions */
 require('dotenv').config();
 
-import express, { Router, Request, Response, NextFunction } from 'express';
+import express, { Router, Request, Response } from 'express';
 
 import auth from './login';
 import routes from './routes';
@@ -23,7 +23,7 @@ const server = (options: Options): Router => {
     const { code } = req.query;
     const accessToken = await auth.authorize(code as string);
 
-    cache!.add(process.env.client_id as string, expiration, accessToken as string);
+    await cache.add(process.env.client_id as string, expiration, accessToken as string);
     res.status(200).redirect('/spotify/playlist');
   });
 
@@ -31,13 +31,7 @@ const server = (options: Options): Router => {
   router.get('/spotify/playlist', (req: Request, res: Response) => {
     routes.playlist(
       options as Options,
-      (err: Error | null, data: any | null) => {
-        if (err) {
-          res.status(400).send(err);
-        } else {
-          res.status(200).send(data);
-        }
-      }
+      (err: Error | null, data: any | null) => { err ? res.status(400).send(err) : res.status(200).send(data); }
     );
   });
 
@@ -45,13 +39,7 @@ const server = (options: Options): Router => {
     routes.playlistInfo(
       req.query as { id: string },
       options as Options,
-      (err: Error | null, data: any | null) => {
-        if (err) {
-          res.status(400).send(err);
-        } else {
-          res.status(200).send(data);
-        }
-      },
+      (err: Error | null, data: any | null) => { err ? res.status(400).send(err) : res.status(200).send(data); }
     );
   });
 

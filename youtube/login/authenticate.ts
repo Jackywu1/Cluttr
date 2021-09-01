@@ -3,21 +3,15 @@
 import { Request, Response } from 'express';
 import querystring from 'querystring';
 
-import youtube from '../config/youtube.config';
-
-const {
-  client_id, redirect_uri,
-} = youtube;
-
-const authenticate = (req: Request, res: Response) => {
+const authenticate = (req: Request, res: Response): void => {
   const query = querystring.stringify({
-    client_id,
-    redirect_uri,
+    client_id: process.env.client_id as string,
+    redirect_uri: 'http://127.0.0.1:3000/youtube/authorize',
     response_type: 'code',
     scope: 'https://www.googleapis.com/auth/youtube',
   });
 
-  res.redirect(`https://accounts.google.com/o/oauth2/v2/auth?${query}`);
+  return res.redirect(`https://accounts.google.com/o/oauth2/v2/auth?${query}`);
 };
 
 export default authenticate;
