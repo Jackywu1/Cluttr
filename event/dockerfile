@@ -1,0 +1,7 @@
+FROM node:latest
+RUN mkdir -p /event
+WORKDIR /event
+COPY . /event/
+RUN npm install
+EXPOSE 4000
+CMD ["npm", "start"]

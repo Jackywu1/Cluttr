@@ -29,27 +29,12 @@ services:
     ports:
       - '8000:8000'
 
-  # gateway1:
-  #   build: gateway/
-  #   volumes:
-  #     - ./gateway/:/gateway1/
-  #   depends_on:
-  #     - 'spotify-graph'
-  #     - 'twitter-graph'
-  #     - 'youtube-graph'
-  #   ports:
-  #     - '8000:8000'
-
-  # gateway2:
-  #   build: gateway/
-  #   volumes:
-  #     - ./gateway/:/gateway2/
-  #   depends_on:
-  #     - 'spotify-graph'
-  #     - 'twitter-graph'
-  #     - 'youtube-graph'
-  #   ports:
-  #     - '8000:8000'
+  event:
+    build: event/
+    volumes:
+      - ./event/:/event/
+    ports:
+      - '4000:4000'
 
   spotify:
     build: spotify/
@@ -100,6 +85,9 @@ services:
       - ./youtube-graph/:/youtube-graph/
     ports:
       - '3337:3337'
+
+  eventCache:
+    image: redis:latest
 
   spotifyCache:
     image: redis:latest
