@@ -6,8 +6,12 @@ require('dotenv').config();
 
 import express, { Router, Request, Response } from 'express';
 
-import { userProfile, userTweets } from './routes';
+import { userProfile, userTweets, searchUser } from './routes';
 import Options from './options';
+
+const callback = (req: Request, res: Response) => (err: Error | null, data: any | null) => {
+  err ? res.status(400).send(err) : res.status(200).send(data);
+};
 
 export const twitter = (options: Options = {}): Router => {
   const router = express();
@@ -15,30 +19,24 @@ export const twitter = (options: Options = {}): Router => {
   router.get('/twitter/tweets/:userid', (req: Request, res: Response) => {
     userTweets(
       req.params as { userid: string },
-      options as Options,
-      (err: Error | null, data: any | null) => {
-        if (err) {
-          res.status(400).send(err);
-        } else {
-          res.status(200).send(data);
-        }
-      },
+      options,
+      callback(req, res),
+    );
+  });
+
+  router.get('/twitter/search', (req: Request, res: Response) => {
+    searchUser(
+      req.query as { term: string },
+      options,
+      callback(req, res),
     );
   });
 
   router.get('/twitter/:user', (req: Request, res: Response) => {
-    const callback = (err: Error | null, data: any | null) => {
-      if (err) {
-        res.status(400).send(err);
-      } else {
-        res.status(200).send(data);
-      }
-    };
-
     userProfile(
       req.params as { user: string },
-      options as Options,
-      callback,
+      options,
+      callback(req, res),
     );
   });
 

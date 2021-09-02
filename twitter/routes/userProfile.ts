@@ -20,7 +20,7 @@ export const userProfile = async (
       url: `https://api.twitter.com/2/users/by/username/${user}?${query}`,
       headers: {
         'User-Agent': 'v2TweetLookupJS',
-        Authorization: `Bearer ${process.env.twitter_bearer_token}`
+        Authorization: `Bearer ${process.env.bearer_token}`
       },
     };
 
