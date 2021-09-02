@@ -1,5 +1,5 @@
-import NormalizedCache from './cache/normalized-cache';
+import { NormalizedCache } from './cache/normalized-cache';
 
-export default interface Options {
+export interface Options {
   cache: NormalizedCache;
 }

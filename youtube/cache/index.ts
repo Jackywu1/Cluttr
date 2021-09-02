@@ -1,18 +1,15 @@
 /* eslint-disable no-unused-vars */
 import { promisify } from 'util';
 
-import connection from './connection';
-import NormalizedCache from './normalized-cache';
+import { connection } from './connection';
+import { NormalizedCache } from './normalized-cache';
 
-const createCache = (): NormalizedCache => {
+export const cache = (): NormalizedCache => {
   const client = connection();
-  const cache: NormalizedCache = {
+  const cacheInstance: NormalizedCache = {
     add: promisify(client.setex).bind(client),
     get: promisify(client.get).bind(client),
   };
 
-  return cache;
-}
-
-
-export default createCache;
+  return cacheInstance;
+};

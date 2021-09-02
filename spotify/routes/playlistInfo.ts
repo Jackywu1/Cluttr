@@ -3,7 +3,7 @@
 /* eslint-disable import/no-unresolved */
 // import { Request, Response } from 'express';
 import axios from 'axios';
-import Options from '../options';
+import { Options } from '../options';
 
 const request = async (id: string, token: string) => await axios({
   url: `https://api.spotify.com/v1/playlists/${id}/tracks`,

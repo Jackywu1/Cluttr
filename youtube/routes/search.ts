@@ -13,7 +13,7 @@ const request = async (query: string, accessToken: string): Promise<any | Error>
   },
 });
 
-const search = async (
+export const search = async (
   { term }: { term: string },
   { cache }: Options,
   callback: (err: Error | null, data: any | null) => void,
@@ -40,5 +40,3 @@ const search = async (
     callback(new Error(err), null);
   }
 };
-
-export default search;

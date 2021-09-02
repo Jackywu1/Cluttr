@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import redis, { RedisClient } from 'redis';
 
-const connection = ({
+export const connection = ({
   url
 }: {
   url: string
@@ -10,5 +10,3 @@ const connection = ({
 }): RedisClient => redis.createClient({
   url,
 });
-
-export default connection;

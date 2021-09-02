@@ -8,7 +8,7 @@ import express, { Router, Request, Response } from 'express';
 import { authenticate, authorize } from './login';
 import { currentPlaying, playlist, playlistInfo } from './routes';
 
-import Options from './options';
+import { Options } from './options';
 import { NormalizedCache } from './cache/normalized-cache';
 
 const callback = (req: Request, res: Response) => (err: Error | null, data: any | null) => {

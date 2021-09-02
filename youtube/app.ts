@@ -2,8 +2,8 @@
 /* eslint-disable import/no-unresolved */
 import express from 'express';
 
-import youtube from '.';
-import cache from './cache';
+import { youtube } from '.';
+import { cache } from './cache';
 
 const PORT = process.env.PORT || 3000;
 

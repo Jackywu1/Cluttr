@@ -3,7 +3,7 @@
 /* eslint-disable import/no-unresolved */
 import axios from 'axios';
 
-import Options from '../options';
+import { Options } from '../options';
 
 const request = async (accessCode: string): Promise<any> => {
   return axios({
