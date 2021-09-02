@@ -3,7 +3,7 @@
 /* eslint-disable camelcase */
 import axios from 'axios';
 import querystring from 'querystring';
-import Options from '../options';
+import { Options } from '../options';
 
 const request = async (query: string, accessToken: string): Promise<any | Error> => await axios({
   url: `https://youtube.googleapis.com/youtube/v3/search?${query}}`,
