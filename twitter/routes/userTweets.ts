@@ -6,7 +6,7 @@ import querystring from 'querystring';
 
 import Options from '../options';
 
-const userTweets = async (
+export const userTweets = async (
   { userid }: { userid: string },
   options: Options | undefined,
   callback: (err: null | Error, data: any | null) => void
@@ -47,5 +47,3 @@ const userTweets = async (
     callback(err, null);
   }
 };
-
-export default userTweets;

@@ -6,7 +6,7 @@ import querystring from 'querystring';
 
 import Options from '../options';
 
-const userProfile = async (
+export const userProfile = async (
   { user }: { user: string },
   options: Options | undefined,
   callback: (err: null | Error, data: any | null) => void,
@@ -47,6 +47,4 @@ const userProfile = async (
   } catch (err) {
     callback(new Error(err), null);
   }
-}
-
-export default userProfile;
+};

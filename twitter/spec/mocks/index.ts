@@ -1,5 +1,1 @@
-import mockCache from './cache';
-
-export default {
-  mockCache,
-};
+export * from './cache';

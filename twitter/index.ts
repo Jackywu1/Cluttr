@@ -6,14 +6,14 @@ require('dotenv').config();
 
 import express, { Router, Request, Response } from 'express';
 
-import routes from './routes';
+import { userProfile, userTweets } from './routes';
 import Options from './options';
 
-const server = (options: Options = {}): Router => {
+export const twitter = (options: Options = {}): Router => {
   const router = express();
 
   router.get('/twitter/tweets/:userid', (req: Request, res: Response) => {
-    routes.userTweets(
+    userTweets(
       req.params as { userid: string },
       options as Options,
       (err: Error | null, data: any | null) => {
@@ -35,7 +35,7 @@ const server = (options: Options = {}): Router => {
       }
     };
 
-    routes.userProfile(
+    userProfile(
       req.params as { user: string },
       options as Options,
       callback,
@@ -44,5 +44,3 @@ const server = (options: Options = {}): Router => {
 
   return router;
 };
-
-export default server;
