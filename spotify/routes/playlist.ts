@@ -15,7 +15,7 @@ const request = async (accessCode: string): Promise<any> => {
   });
 };
 
-const playlist = async (
+export const playlist = async (
   { cache }: Options,
   callback: (err: Error | null, data: any | null) => void,
 ) => {
@@ -37,4 +37,4 @@ const playlist = async (
   }
 };
 
-export default playlist;
+// export default playlist;

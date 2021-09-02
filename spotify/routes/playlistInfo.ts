@@ -14,7 +14,7 @@ const request = async (id: string, token: string) => await axios({
   },
 });
 
-const playlistInfo = async (
+export const playlistInfo = async (
   { id }: { id: string },
   { cache }: Options,
   callback: (err: Error | null, data: any | null) => void,
@@ -36,4 +36,4 @@ const playlistInfo = async (
   }
 };
 
-export default playlistInfo;
+// export default playlistInfo;

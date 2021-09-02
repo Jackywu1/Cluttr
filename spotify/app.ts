@@ -2,14 +2,14 @@
 /* eslint-disable import/no-unresolved */
 import express from 'express';
 
-import spotify from '.';
-import cache from './cache';
+import { spotify } from '.';
+import { createCache } from './cache';
 
 const PORT = process.env.PORT || 1000;
 
 const server = express();
 const app = spotify({
-  cache: cache(),
+  cache: createCache(),
 });
 
 server.use(app);

@@ -5,7 +5,7 @@
 import axios from 'axios';
 import querystring from 'querystring';
 
-const authorize = async (code: string): Promise<string | Error> => {
+export const authorize = async (code: string): Promise<string | Error> => {
   try {
     const data = querystring.stringify({
       grant_type: 'authorization_code',
@@ -27,5 +27,3 @@ const authorize = async (code: string): Promise<string | Error> => {
     return new Promise((_, reject) => reject(new Error(err)));
   }
 }
-
-export default authorize;
