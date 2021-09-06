@@ -24,6 +24,6 @@ export const authorize = async (code: string): Promise<string | Error> => {
 
     return response.access_token as Promise<string>;
   } catch (err) {
-    return new Promise((_, reject) => reject(new Error(err)));
+    return new Promise((_, reject) => reject(new Error(err as string)));
   }
 }

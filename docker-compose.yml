@@ -36,6 +36,13 @@ services:
     ports:
       - '4000:4000'
 
+  genius:
+    build: genius/
+    volumes:
+      - ./genius/:/genius/
+    ports:
+      - '5000:5000'
+
   spotify:
     build: spotify/
     volumes:
@@ -96,4 +103,7 @@ services:
     image: redis:latest
 
   youtubeCache:
+    image: redis:latest
+
+  geniusCache:
     image: redis:latest

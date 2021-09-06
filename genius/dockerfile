@@ -1,0 +1,7 @@
+FROM node:latest
+RUN mkdir -p /genius/
+WORKDIR /genius/
+COPY . /genius/
+RUN npm install
+EXPOSE 5000
+CMD ["npm", "start"]

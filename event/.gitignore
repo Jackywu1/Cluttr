@@ -105,3 +105,4 @@ dist
 
 # API keys
 config/edm.config.ts
+data/

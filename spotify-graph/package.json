@@ -5,7 +5,8 @@
   "main": "index.ts",
   "scripts": {
     "start": "npx -p ts-node ts-node ./app.ts",
-    "start:dev": "npx nodemon"
+    "start:dev": "npx nodemon",
+    "publish": "rover subgraph introspect http://127.0.0.1:1337 | rover subgraph publish spotify@staging --name spotify --routing-url http://127.0.0.1:1337/ --schema -"
   },
   "keywords": [],
   "author": "",
