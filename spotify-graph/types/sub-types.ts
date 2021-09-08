@@ -10,9 +10,9 @@ const subTypes = `
   }
 
   type Owner {
+    id: String!
     display_name: String!
     external_urls: Url
-    id: String!
   }
 
   type Url {
