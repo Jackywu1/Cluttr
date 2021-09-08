@@ -3,6 +3,8 @@ import querystring from 'querystring';
 
 import { Options } from '../options';
 
+const expiration: number = parseInt(process.env.expiration as string) || 3600;
+
 const request = (term: string, token: string): Promise<any | Error> => {
   const query = querystring.stringify({
     q: encodeURIComponent(term),
@@ -25,14 +27,18 @@ export const search = async (
   try {
     const cachedData = await cache.get(term);
     if (cachedData) callback(null, JSON.parse(cachedData));
+    else {
+      const accessToken = await cache.get(process.env.client_id as string);
 
-    const accessToken = await cache.get(process.env.cient_id as string);
+      const { data } = await request(term, accessToken);
+      const { response } = data;
 
-    const { data } = await request(term, accessToken);
-    const { response } = data;
+      await cache.add(term, expiration, JSON.stringify(response));
 
-    callback(null, response);
+      callback(null, response);
+    }
   } catch (err) {
+    console.log(0);
     callback(new Error(err as string), null);
   }
 };

@@ -22,7 +22,7 @@ export const genius = (options: Options) => {
     const { code } = req.query;
     const accessToken = await authorize(code as string) as string;
 
-    cache.add(process.env.client_id as string, expiration, accessToken);
+    await cache.add(process.env.client_id as string, expiration, accessToken);
 
     res.status(200).redirect('/genius/search?term=illenium');
   });
