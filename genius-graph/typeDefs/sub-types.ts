@@ -1,6 +1,6 @@
 export const subTypes = `
   type SearchResult {
-    id: Number
+    id: Int!
     url: String!
     song_art_image_url: String!
     title_with_featured: String!
@@ -8,7 +8,7 @@ export const subTypes = `
   }
 
   type Artist {
-    id: Number!
+    id: Int!
     name: String!
     url: String!
   }
