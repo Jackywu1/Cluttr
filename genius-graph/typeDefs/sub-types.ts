@@ -1,10 +1,15 @@
 export const subTypes = `
   type SearchResult {
+    type: String!
+    result: Result!
+  }
+
+  type Result {
     id: Int!
     url: String!
     song_art_image_url: String!
     title_with_featured: String!
-    artist: Artist!
+    primary_artist: Artist!
   }
 
   type Artist {

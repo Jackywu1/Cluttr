@@ -1,0 +1,7 @@
+FROM node:latest
+RUN mkdir -p genius-graph
+WORKDIR /genius-graph
+COPY . /genius-graph/
+RUN npm install
+EXPOSE 5337
+CMD ["npm", "start"]

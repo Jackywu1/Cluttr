@@ -1,9 +1,6 @@
-import { Artist } from './artist';
+import { Result } from './result';
 
 export interface SearchResult {
-  id: number;
-  url: string;
-  song_art_image_url: string;
-  title_with_featured: string;
-  artist: Artist;
+  type: string;
+  result: Result;
 };

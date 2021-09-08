@@ -14,7 +14,7 @@ const request = async (term: string): Promise<any | Error> => {
 export const search = async (_: any, { term }: { term: string }): Promise<SearchResult | Error> => {
   try {
     const { data } = await request(term);
-    return data.hits.result as Promise<SearchResult>;
+    return data.hits as Promise<SearchResult>;
   } catch (err) {
     return new Promise((_, reject) => reject(new Error(err as string))) as Promise<Error>;
   }

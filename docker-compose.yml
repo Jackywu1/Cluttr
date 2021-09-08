@@ -43,6 +43,13 @@ services:
     ports:
       - '5000:5000'
 
+  genius-graph:
+    build: genius-graph/
+    volumes:
+      - ./genius-graph/:/genius-graph/
+    ports:
+      - '5337:5337'
+
   spotify:
     build: spotify/
     volumes:
