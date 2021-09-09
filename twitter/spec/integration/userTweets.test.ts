@@ -5,15 +5,15 @@
 /* eslint-disable import/extensions */
 import request from 'supertest';
 
-import twitter from '../..';
+import { twitter } from '../..';
 import Tweet from '../../../twitter-graph/interfaces/tweet';
-import mocks from '../mocks';
+import { mockCache } from '../mocks';
 
 jest.mock('../../../twitter/cache');
 
 describe('GET /twitter/tweets/:userid', () => {
   const testuserid = '2187489492'; // illenium
-  const cache = mocks.mockCache();
+  const cache = mockCache();
   // const testtweet: Tweet = {
   //   id: '1427681723303661600',
   //   created_at: 'Tue Aug 17 17:20:22 +0000 2021',

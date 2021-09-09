@@ -1,12 +1,12 @@
 import request from 'supertest';
 
-import twitter from '../..';
-import mocks from '../mocks';
+import { twitter } from '../..';
+import { mockCache } from '../mocks';
 
 jest.mock('../../../twitter/cache');
 
 describe('GET /twitter/:user', () => {
-  const cache = mocks.mockCache();
+  const cache = mockCache();
   const testuser = 'illenium';
 
   test('responds with data', async () => {
